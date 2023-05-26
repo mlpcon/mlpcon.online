@@ -1,0 +1,174 @@
+@charset "UTF-8";
+@font-face {
+	font-family: Woodrow;
+	src: local("Woodrow"), 
+		local("Woodrow W00 Reg"), 
+		local("WoodrowW00-Reg"), 
+		url(/font/woodrow.woff2) format("woff2"), 
+		url(/font/woodrow.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	src: local("Comic Sans MS"),
+		local("ComicSansMS"),
+		local("Comic Sans"),
+		local("ComicSans"),
+		url(/font/comic.woff2) format("woff2"),
+		url(/font/comic.woff) format("woff"),
+		url(/font/comic.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-weight: bold;
+	src: local("Comic Sans MS Bold"),
+		local("ComicSansMS-Bold"),
+		local("Comic Sans Bold"),
+		local("ComicSans-Bold"),
+		url(/font/comicbd.woff2) format("woff2"),
+		url(/font/comicbd.woff) format("woff"),
+		url(/font/comicbd.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-style: italic;
+	src: local("Comic Sans MS Italic"),
+		local("ComicSansMS-Italic"),
+		local("Comic Sans Italic"),
+		local("ComicSans-Italic"),
+		url(/font/comici.woff2) format("woff2"),
+		url(/font/comici.woff) format("woff"),
+		url(/font/comici.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-style: italic;
+	font-weight: bold;
+	src: local("Comic Sans MS Bold Italic"),
+		local("ComicSansMS-BoldItalic"),
+		local("Comic Sans Bold Italic"),
+		local("ComicSans-BoldItalic"),
+		url(/font/comicz.woff2) format("woff2"),
+		url(/font/comicz.woff) format("woff"),
+		url(/font/comicz.ttf) format("truetype");
+}
+@font-face {
+	font-family: Equestria;
+	src: local("Equestria Neue"), 
+		local("EquestriaNeue"), 
+		url(/font/EquestriaNeue.woff2) format("woff2"), 
+		url(/font/EquestriaNeue.ttf) format("truetype");
+}
+/* generic */
+body, .p-name {
+	font-family: Comic, cursive;
+	-webkit-font-feature-settings: "kern" 1;
+	font-kerning: normal;
+}
+b, h1, h2, h3, h4, h5, h6, strong {
+	font-weight: bold;
+}
+h1, h2 { margin: 0.3em 0; }
+h3, h4 { margin: 0; }
+ins { text-decoration: none; }
+textarea { tab-size: 4; }
+
+.channel-emote { max-width: 75px; }
+.h-event { margin-bottom: 1em; }
+details.h-event { display: inline-block; }
+.motd-header {
+	font-family: Woodrow, cursive;
+	font-weight: normal;
+	letter-spacing: 0.05em;
+}
+.shout {
+	color: #ef4f91;
+	font-weight: normal;
+	font-family: Equestria;
+}
+span.shout > strong { font-weight: normal; }
+.subheading { font-size: x-small; }
+
+#contard {
+	align-self: flex-end;
+	height: 20em;
+}
+#event-list {
+	align-self: flex-start;
+	width: 75%;
+}
+#event-list details { display: block; }
+#event-list details summary {
+	cursor: pointer;
+	display: inline-block;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+#event-list details summary span.carat::before {
+	content: "►";
+	margin-right: 0.1em;
+	width: 1em;
+}
+#event-list details[open] summary .carat::before { content: "▼"; }
+#motd {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+/* Image Transforms by Xaekai */
+@import url("https://resources.pink.horse/css/img_fx.css");
+
+/* snippets from MLP Anniversary CyTube CSS by Xaekai https://resources.pink.horse/css/mlpanni.css */
+/* MLP Anniversary: https://cytu.be/r/mlpanniversary */
+.image-embed-small  { max-height: 150px; max-width: 55%; }
+.image-embed-medium { max-height: 240px; max-width: 360px; }
+.image-embed-large  { max-height: 320px; min-width: 40%; max-width: 66%; }
+.image-embed-tiny { max-height: 112px; max-width: 50%; }
+.playlist-thumbnail { max-height: 180px; max-width: 240px; }
+
+/*  Userlist stuff  */
+#userlist {
+	min-width: 96px;
+	width: auto;
+	transition-duration: 1s; 
+
+	background-image:    url("/image/anon.png");
+	background-position: left bottom;
+	background-repeat:   no-repeat;
+	background-size:     90% auto;
+}
+
+#userlist .userlist_item {
+	padding-left:  2px;
+	padding-right: 2px;
+	/*background: rgba(0,0,0,0.65);*/
+}
+
+#voteskip { min-width: 100px; }
+
+.userlist_op {
+	color: #3399FF!important;
+	font-weight: bold!important;
+}
+
+.userlist_owner {
+	color: #205FD9 !important;
+	font-weight: bold!important;
+}
+
+.profile-box {
+	max-height: 340px;
+}
+.profile-image {
+	width: 150px;
+	height: 150px;
+}
+
+#search_unified_buttons img {
+	height: 36px;
+	filter: grayscale(66%);
+}
+.search-label { border: 2px solid transparent; }
+.search-label.active { border: 2px solid rgba(102, 175, 233, 0.5); }
