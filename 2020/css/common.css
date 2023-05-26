@@ -1,0 +1,189 @@
+@charset "UTF-8";
+<!--# set value="#7289da" var="bg-color" -->
+<!--# set value="#2c2f33" var="header-bg-color" -->
+<!--# set value="#fff" var="fg-color" -->
+<!--# set value="#99aab5" var="highlight-color" -->
+@font-face {
+	font-family: Comic;
+	src: local("Comic Sans MS"),
+		local("ComicSansMS"),
+		local("Comic Sans"),
+		local("ComicSans"),
+		url(/font/comic.woff2) format("woff2"),
+		url(/font/comic.woff) format("woff"),
+		url(/font/comic.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-weight: bold;
+	src: local("Comic Sans MS Bold"),
+		local("ComicSansMS-Bold"),
+		local("Comic Sans Bold"),
+		local("ComicSans-Bold"),
+		url(/font/comicbd.woff2) format("woff2"),
+		url(/font/comicbd.woff) format("woff"),
+		url(/font/comicbd.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-style: italic;
+	src: local("Comic Sans MS Italic"),
+		local("ComicSansMS-Italic"),
+		local("Comic Sans Italic"),
+		local("ComicSans-Italic"),
+		url(/font/comici.woff2) format("woff2"),
+		url(/font/comici.woff) format("woff"),
+		url(/font/comici.ttf) format("truetype");
+}
+@font-face {
+	font-family: Comic;
+	font-style: italic;
+	font-weight: bold;
+	src: local("Comic Sans MS Bold Italic"),
+		local("ComicSansMS-BoldItalic"),
+		local("Comic Sans Bold Italic"),
+		local("ComicSans-BoldItalic"),
+		url(/font/comicz.woff2) format("woff2"),
+		url(/font/comicz.woff) format("woff"),
+		url(/font/comicz.ttf) format("truetype");
+}
+/* generic */
+:root, body, main {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	background-color: <!--# echo var="bg-color" -->;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	
+	font-family: Comic, cursive;
+	color: <!--# echo var="fg-color" -->;
+	-webkit-font-feature-settings: "kern" 1;
+	font-kerning: normal;
+
+	display: grid;
+	align-items: stretch;
+	column-gap: 0;
+	grid-column-gap: 0;
+	grid-row-gap: 0;
+	grid-template-columns: 15em 1fr;
+	grid-template-rows: 1fr 5em;
+	grid-template-areas:
+		"sidebar main"
+		"sidebar footer";
+	justify-items: stretch;
+	row-gap: 0;
+}
+b, h1, h2, h3, h4, h5, h6, strong {
+	font-weight: bold;
+}
+h1, h2 { margin: 0.3em 0; }
+h1 { font-size: 3em; }
+h2 { font-size: 2.5em; }
+ins { text-decoration: none; }
+
+/* main */
+body > main {
+	font-size: 1.3em;
+	grid-area: main;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	padding-left: 2em;
+	padding-right: 0.5em;
+	text-shadow: -0.5px -0.5px #000, 0.5px -0.5px #000, -0.5px 0.5px #000, 0.5px 0.5px #000;
+
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+body > main > * { max-width: 100%; }
+body > main a { text-shadow: none; }
+
+/* sidebar */
+body > header {
+	background-color: <!--# echo var="header-bg-color" -->;
+	grid-area: sidebar;
+}
+body > header > nav > ul {
+	color: <!--# echo var="highlight-color" -->;
+	font-size: 1.5em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+body > header > nav > ul > li { padding-top: 0.5em; }
+body > header > nav > ul > li > a {
+	color: inherit;
+	text-decoration: none;
+
+	transition-duration: 0.3s;
+	transition-property: color, filter;
+	transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+}
+body > header > nav > ul > li > a:hover {
+	color: <!--# echo var="bg-color" -->;
+	filter: blur(0.03em);
+}
+
+/* footer */
+body > footer { grid-area: footer; }
+
+#anon-img {
+	height: 20em;
+	max-width: 100%;
+
+	position: fixed;
+	bottom: 0;
+	z-index: -999;
+}
+#contard-img {
+	height: 15em;
+	max-width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		display: flex;
+		align-content: stretch;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+	body > header { height: 21em; }
+	body > header > nav > ul > li { padding-bottom: 0.5em; }
+	body > main { padding: 0 0.5em; }
+
+	#anon-img { height: 17em; }
+	#contard-img {
+		height: 12em;
+		position: absolute;
+		top: 0;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	h1 { font-size: 2.5em; }
+	h2 { font-size: 2em; }
+
+	body > header { height: 13em; }
+	body > header > nav > ul { font-size: 1em; }
+
+	#anon-img { height: 13em; }
+	#contard-img { height: 8em; }
+}
+
+@media screen and (max-width: 475px) {
+	h1 { font-size: 1.2em; }
+	h2 { font-size: 1.1em; }
+
+	body > main { font-size: 1em; }
+}

@@ -1,0 +1,116 @@
+<!--# set value="36432699" var="thread-number" -->
+<!--# set value="${scheme}://${host}/" var="fqn_host" -->
+<!--# if expr="$pageDescription" --><!--# else --><!--# set value="${mlpcon_siteDescription}" var="pageDescription" --><!--# endif -->
+<!--# if expr="$pageName" --><!--# set value="${pageName} - ${mlpcon_siteTitle}" var="pageName" --><!--# else --><!--# set value="${mlpcon_siteTitle}" var="pageName" --><!--# endif -->
+<!--# if expr="$pageUrl" --><!--# set value="${fqn_host}${pageUrl}" var="pageUrl" --><!--# else --><!--# set value="${fqn_host}" var="pageUrl" --><!--# endif -->
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" 🦄 🐎🐱>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+		<base href="<!--# echo var="fqn_host" -->">
+		<link href="<!--# echo var="pageUrl" -->" rel="canonical" type="text/html">
+		<!--# if expr="$hasHead" --><!--# include file="block" stub="head" --><!--# endif -->
+		<link href="<!--# echo var="fqn_host" -->" rel="home index" type="text/html">
+		<link href="/manifest.jsonmanifest" rel="manifest" type="application/manifest+json">
+		<link href="/sitemap.xml" rel="sitemap" type="text/xml">
+		<meta content="/browserconfig.xml" name="msapplication-config">
+		<meta content="<!--# echo var="pageName" -->" name="title" property="og:title">
+		<meta content="<!--# echo var="pageDescription" -->" name="description" property="og:description">
+		<meta content="<!--# echo var="mlpcon_siteKeywords" -->" name="keywords">
+		<meta content="<!--# echo var="fqn_host" --><!--# echo var="mlpcon_siteThumbnail" -->" name="twitter:image" property="og:image">
+		<meta content="722" property="og:image:width">
+		<meta content="653" property="og:image:height">
+		<meta content="image/png" property="og:image:type">
+		<meta content="website" property="og:type">
+		<meta content="<!--# echo var="pageUrl" -->" property="og:url">
+		<meta content="summary" name="twitter:card">
+		<meta content="@TwifagHN" name="twitter:site">
+		<meta content="<!--# echo var="pageName" -->" name="twitter:title">
+		<meta content="<!--# echo var="pageDescription" -->" name="twitter:description">
+		<link href="//iwtcits.com" importance="high" rel="bestpony" type="text/html">
+		<link href="//donutsteal.pl" rel="code-license content-license license" type="text/html">
+		<script type="application/ld+json">
+			{
+				"@context": {
+					"@base": "<!--# echo var="fqn_host" -->",
+					"@version": 1.1,
+					"@vocab": "https://schema.org"
+				},
+				"@graph": [
+					{
+						"@id": "",
+						"@type": "WebPage",
+						"audience": {
+							"@type": "Audience",
+							"audienceType": "horsefuckers",
+							"alternateName": "pony fags",
+							"description": "Anonymous nor/mlp/eople who frequent the /mlp/ board on 4chan.",
+							"image": "https://derpicdn.net/img/view/2020/3/24/2304610.png",
+							"name": "horsefuckers"
+						}, 
+						"author": {
+							"@type": "Person",
+							"additionalName": "Twifag",
+							"address": {
+								"@type": "PostalAddress",
+								"addressCountry": "US",
+								"addressLocality": "Orlando",
+								"addressRegion": "FL",
+								"postOfficeBoxNumber": "621622",
+								"postalCode": "32862-1622"
+							},
+							"email": "twifag@mlpcon.online",
+							"gender": "horsefucker",
+							"givenName": "Corpulent Brony",
+							"honorificPrefix": "Mr.",
+							"nationality": "US",
+							"telephone": "+1 (844) 4TWI-FAG",
+							"weight": {
+								"@type": "QuantitativeValue",
+								"unitText": "corpulent",
+								"value": 1
+							},
+							"name": "Corpulent Brony",
+							"url": "https://twitter.com/TwifagHN"
+						},
+						"description": "<!--# echo var="pageDescription" -->",
+						"encoding": {
+							"@type": "MediaObject",
+							"contentUrl": "<!--# echo var="pageUrl" -->",
+							"encodingFormat": "html"
+						},
+						"encodingFormat": "text/html",
+						"isAccessibleForFree": true,
+						"keywords": "<!--# echo var="mlpcon_siteKeywords" -->",
+						"license": "https://donutsteal.pl/",
+						"mainContentOfPage": {
+							"@type": "WebPageElement",
+							"cssSelector": "main"
+						},
+						"material": "bits",
+						"name": "<!--# echo var="pageName" -->",
+						"primaryImageOfPage": "<!--# echo var="fqn_host" --><!--# echo var="mlpcon_siteThumbnail" -->", 
+						"timeRequired": "P5M",
+						"typicalAgeRange": "18-",
+						"url": "<!--# echo var="pageUrl" -->"
+					}
+				]
+			}
+		</script>
+		<!--# if expr="$hasMicrodata" --><!--# include file="block" stub="microdata" --><!--# endif -->
+		<link href="favicon.png" rel="icon" sizes="269x269" type="image/png">
+		<title><!--# echo var="pageName" --></title>
+		<link href="/css/common.css" rel="stylesheet">
+	</head>
+	<body>
+		<header>
+			<a href="/" rel="home index"><img id="contard-img" src="/image/contard.png"></a>
+			<nav>
+				<ul>
+					<li><a href="/schedule.html">Schedule</a></li>
+					<li><a href="/vendors.html">Vendors</a></li>
+					<li><a href="//boards.4channel.org/mlp/thread/<!--# echo var="thread-number" -->" rel="external noopener" target="_blank">Current Thread</a></li>
+					<li><a href="/threads.html">Thread History</a></li>
+				</ul>
+			</nav>
+		</header>

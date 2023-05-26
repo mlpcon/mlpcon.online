@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+	<!--# set value="Schedule" var="pageName" -->
+	<!--# set value="schedule.html" var="pageUrl" -->
+	<!--# set value="The event schedule for /mlp/ con online, an online con by and for the anons from /mlp/." var="pageDescription" -->
+	<!--# set value="js/moment.min.js" var="momentScript" -->
+	<!--# set value="js/moment-timezone-with-data-10-year-range.min.js" var="momentTimezoneScript" -->
+	<!--# block name="head" -->
+		<link as="script" href="<!--# echo var="momentScript" -->" rel="preload">
+		<link as="script" href="<!--# echo var="momentTimezoneScript" -->" rel="preload">
+	<!--# endblock -->
+	<!--# include file="/ssi/common-header.html" -->
+		<main>
+			<h1>Schedule</h1>
+			<div>We're currently putting together the schedule, please check back later!  It will be finalized about a week before the con.</div>
+			<ul id="time-zone-menu">
+
+			</ul>
+		</main>
+		<script>
+			"use strict";
+			(function() {
+				const globalVars = (function() {
+					if (typeof globalThis !== "undefined")
+						return globalThis;
+					else if (typeof self !== "undefined")
+						return self;
+					else if (typeof window !== "undefined")
+						return window;
+					else if (typeof global !== "undefined")
+						return global;
+					throw new Error("Unable to locate global object");
+				})();
+				const momentScript = globalVars.document.createElement("script");
+				const momentTimezoneScript = globalVars.document.createElement("script");
+
+				function onMomentScriptError() { throwScriptError("moment.js", removeListeners.bind(undefined, momentScript, onMomentScriptError, onMomentScriptLoad)); }
+				function onMomentScriptLoad() {
+					globalVars.document.head.appendChild(momentTimezoneScript);
+					removeListeners(momentScript, onMomentScriptError, onMomentScriptLoad);
+				}
+				function onMomentTimezoneScriptError() {
+					throwScriptError("moment-timezone.js", removeListeners.bind(undefined, momentTimezoneScript, onMomentTimezoneScriptError, onMomentTimezoneScriptLoad));
+				}
+				function onMomentTimezoneScriptLoad() {
+					const doc = globalVars.document.createDocumentFragment();
+					const timeZoneMenu = globalVars.document.getElementById("time-zone-menu");
+					const timeZoneNames = moment.tz.names();
+					const menu = new ListMenu();
+					timeZoneNames.forEach((timeZone) => {
+						const timeZoneHierarchy = timeZone.split("/");
+						let currentMenu = menu;
+
+						for (let i = 0; i < timeZoneHierarchy.length; i++) {
+							if (!currentMenu.has(timeZoneHierarchy[i])) {
+								const path = (i === 0) ? timeZoneHierarchy[i] : `${currentMenu.path}/${timeZoneHierarchy[i]}`;
+
+								if (i === timeZoneHierarchy.length - 1)
+									currentMenu.set(timeZoneHierarchy[i], new ListMenuItem({ name: timeZoneHierarchy[i], path }));
+								else 
+									currentMenu.set(timeZoneHierarchy[i], new ListMenu({ name: timeZoneHierarchy[i], path }));
+							}
+							currentMenu = currentMenu.get(timeZoneHierarchy[i]);
+						}
+					});
+					menu.cleanDuplicates();
+					menu.forEach((item) => { doc.appendChild(item.toListItem()); });
+					timeZoneMenu.appendChild(doc);
+					removeListeners(momentTimezoneScript, onMomentTimezoneScriptError, onMomentTimezoneScriptLoad);
+				}
+				function removeListeners(script, errorListener, loadListener) {
+					script.removeEventListener("error", errorListener);
+					script.removeEventListener("load", loadListener);
+				}
+				function throwScriptError(scriptName, removeListenersFunction) {
+					throw new globalVars.URIError(`Unable to load ${scriptName} script`);
+					removeListenersFunction.call(undefined);
+				}
+
+				momentScript.async = momentScript.defer = momentTimezoneScript.async = momentTimezoneScript.defer = true;
+				momentScript.src = "<!--# echo var="momentScript" -->";
+				momentScript.addEventListener("error", onMomentScriptError, { once: true, passive: true });
+				momentScript.addEventListener("load", onMomentScriptLoad, { once: true, passive: true });
+				momentTimezoneScript.src = "<!--# echo var="momentTimezoneScript" -->";
+				momentTimezoneScript.addEventListener("error", onMomentTimezoneScriptError, { once: true, passive: true });
+				momentTimezoneScript.addEventListener("load", onMomentTimezoneScriptLoad, { once: true, passive: true });
+				globalVars.document.head.appendChild(momentScript);
+
+				class ListMenu extends globalVars.Map {
+					constructor({ name, path } = { name: "", path: "" }) {
+						super();
+						this.name = name;
+						this.path = path;
+					}
+					get displayName() { return (this.hasOwnProperty("_displayName")) ? this._displayName : this._displayName = this.name.replace(/_/g, " "); }
+					cleanDuplicates() {
+						super.forEach((listMenu, listMenuName) => {
+							if (listMenu instanceof ListMenu) {
+								listMenu.forEach((listMenuItem, listMenuItemName) => {
+									if (listMenuItem instanceof ListMenuItem && super.has(listMenuItemName) && super.get(listMenuItemName) instanceof ListMenuItem) 
+										super.delete(listMenuItemName);
+								});
+								listMenu.cleanDuplicates();
+							}
+						});
+					}
+					toListItem() {
+						const listItem = globalVars.document.createElement("li");
+						const listSubMenu = globalVars.document.createElement("ul");
+						listItem.dataset.name = this.name;
+						listItem.dataset.path = this.path;
+						listItem.classList.add("time-zone-menu-level");
+						listItem.appendChild(globalVars.document.createTextNode(this.displayName));
+						super.forEach((item) => { listSubMenu.appendChild(item.toListItem()); });
+						listItem.appendChild(listSubMenu);
+						return listItem;
+					}
+				}
+				class ListMenuItem {
+					constructor({ name, path }) {
+						this.name = name;
+						this.path = path;
+					}
+					get displayName() { return (this.hasOwnProperty("_displayName")) ? this._displayName : this._displayName = this.name.replace(/_/g, " "); }
+					toListItem() {
+						const listItem = globalVars.document.createElement("li");
+						listItem.dataset.name = this.name;
+						listItem.dataset.path = this.path;
+						listItem.classList.add("time-zone-menu-item");
+						listItem.appendChild(globalVars.document.createTextNode(this.displayName));
+						return listItem;
+					}
+				}
+				// class TimeZoneMenu extends globalVars.HTMLElement {
+				// 	constructor() {
+				// 		super();
+				// 		const shadow = this.attachShadow();
+				// 	}
+				// }
+			})();
+		</script>
+	<!--# include file="/ssi/common-footer.html" -->
+</html>

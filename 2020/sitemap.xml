@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# set value="${scheme}://${host}" var="fqn_host" -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+	<url>
+		<changefreq>never</changefreq>
+		<loc><!--# echo var="fqn_host" -->/</loc>
+		<image:image>
+			<image:loc><!--# echo var="fqn_host" -->/image/contard.png</image:loc>
+			<image:caption>Our con mascot, Contard</image:caption>
+			<image:title>Contard</image:title>
+		</image:image>
+		<image:image>
+			<image:loc><!--# echo var="fqn_host" -->/image/anon.png</image:loc>
+			<image:caption>Anonfilly being creeped out by Contard's extremely long vestigial horn</image:caption>
+			<image:title>Anonfilly with Contard's Horn</image:title>
+		</image:image>
+		<image:image>
+			<image:loc><!--# echo var="fqn_host" --><!--# echo var="mlpcon_siteThumbnail" --></image:loc>
+			<image:caption>Anonfilly announcing the date of /mlp/ con 2020</image:caption>
+			<image:title>Anonfilly Announcement</image:title>
+		</image:image>
+	</url>
+	<url>
+		<changefreq>never</changefreq>
+		<loc><!--# echo var="fqn_host" -->/schedule.html</loc>
+	</url>
+	<url>
+		<changefreq>never</changefreq>
+		<loc><!--# echo var="fqn_host" -->/threads.html</loc>
+	</url>
+	<url>
+		<changefreq>never</changefreq>
+		<loc><!--# echo var="fqn_host" -->/vendors.html</loc>
+	</url>
+</urlset>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+	<!--# set value="Schedule" var="pageName" -->
+	<!--# set value="schedule.html" var="pageUrl" -->
+	<!--# set value="The event schedule for /mlp/ con online, an online con by and for the anons from /mlp/." var="pageDescription" -->
+	<!--# set value="true" var="hasMicrodata" -->
+	<!--# block name="microdata" -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Event",
+				"name": "/mlp/ con",
+				"startDate": "2020-06-13T00:00:00.000Z",
+				"endDate": "2020-06-14T05:00:00.000Z",
+				"eventStatus": "https://schema.org/EventScheduled",
+				"eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+				"location": {
+					"@type": "VirtualLocation",
+					"url": "<!--# echo var="pageUrl" -->"
+				},
+				"description": "<!--# echo var="mlpcon_siteDescription" -->",
+				"image": "<!--# echo var="fqn_host" --><!--# echo var="mlpcon_siteThumbnail" -->",
+				"organizer": {
+					"@type": "Organization",
+					"name": "/mlp/",
+					"url": "https://boards.4channel.org/mlp/"
+				}
+			}
+		</script>
+	<!--# endblock -->
+	<!--# include file="/ssi/common-header.html" -->
+		<style>
+			:root {
+				--header-background-color: rgba(171, 172, 174, 0.6);
+				--section-background-color: rgba(23, 32, 79, 0.6);
+			}
+			a.u-url:link { color: #adadf1; }
+			a.u-url:visited { color:#dc9fdc; }
+			div { text-align: left; }
+			h2 { font-size: 1.5em; }
+			h3, h4 { margin: 0; }
+			h2.day-header, section.h-event {
+				backdrop-filter: saturate(180%) blur(10px);
+				border-radius: 1em;
+				border-style: solid;
+				border-width: thin;
+				padding: 0.25em 0.5em;
+			}
+			h2.day-header {
+				background-color: var(--header-background-color);
+				border-color: var(--header-background-color);
+				position: -webkit-sticky;
+				position: sticky;
+				top: 0.25em;
+				z-index: 10;
+			}
+			s {
+				background-color: #000;
+				color: #000;
+				text-decoration: none;
+			}
+			s:hover {
+				background-color: rgba(0, 0, 0, 0.6);
+				color: #fff;
+			}
+			section.h-event {
+				background-color: var(--section-background-color);
+				border-color: var(--section-background-color);
+				box-shadow: 0 0 0.5em var(--section-background-color);
+			}
+			.h-event { margin-bottom: 1em; }
+			.subheading { font-size: x-small; }
+		</style>
+		<main>
+			<h1>Schedule</h1>
+			<div class="subheading">
+				<em>
+					<a href="//docs.google.com/spreadsheets/d/1rtCG3ggt2f8vRFblqRoiOvpkS1Lm7_ep40UuDHWEDZ0/edit?usp=sharing" rel="external noopener" target="_blank">
+						View schedule in spreadsheet form.
+					</a>
+				</em>
+			</div>
+			<div id="schedule-detail">
+				<div>
+					<h2 class="day-header" role="separator"><time datetime="2021-06-11">2021-06-11</time></h2>
+					<section class="h-event">
+						<h3 class="p-name">Twiggie Quest</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-11T19:15:00.000Z">2021-06-11T19:15:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H40M">1 hour, 40 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/4a746b7a-bd72-4b66-afbd-b4f35d13ecb3" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							The Tabletop Game based on the Parody Character Twiggie (or Twiggle) originally created by Jargonscott and written by this other guy Velgarn. It's a randomly generated dungeon crawl, like the old Hero Quest game, where the players control an unique Twiggie, with her own skills and abilities and try to survive to the exit, looting treasures, fighting monsters and pulling the wrong lever.<br>
+							The event will include the Creator (Velgarn) as the Keeper, and JargonScott himself as one of the players
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">In defense of pony life!</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-11T21:00:00.000Z">2021-06-11T21:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/c26297a1-1c61-4d5d-9c53-2bdc7fce5b4a" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							i will defend kino life on stream live for one hour (might have guests)
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">/mlk/ - My Little Firearms</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-11T22:30:00.000Z">2021-06-11T22:30:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT30M">30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" class="u-url" href="//youtu.be/nJOSeTzNjvI" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/65ca4c41-7019-4382-9572-fa6c3d2d468e" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							<!-- This space intentionally left blank. -->
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Pony Archive Panel: Where shit is and how to find it</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-11T23:00:00.000Z">2021-06-11T23:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/RAYWr1uOGVM" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/b01160d6-6ee5-49df-94f6-95d1e545e615" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Pony content is pony history, and goddamn do I love learning about it and finding things, so I hope you will, too. There will be a few things gone over, but the meat of the panel will be how to go about searching for and finding old pony media: from unlisted videos to thought-to-be lost media to that one video you know you saw years ago but just can't seem to find, as well as how to utilize already available resources and what those resources even are (there's sooo many of them). There will also be a quick Q&A session towards the end, and I'll do my best to answer any questions.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Everfree Outpost 101</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T00:00:00.000Z">2021-06-12T00:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive TBD
+						</nav>
+						<div class="e-content">
+							How to play Everfree Outpost, for players new to the game. Join the game and follow along! Will cover getting started, building a house, finding hats, and misc Q&A
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Bronypalooza 2021</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T01:00:00.000Z">2021-06-12T01:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/Z2u2LWX21So" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/9c728775-4d93-4c4f-b78f-56f1b7ec11f6" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Poni should poni poni. Musically!
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">/mlp/odcast Live: /mlp/ con 2021 Open Cast</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T02:00:00.000Z">2021-06-12T02:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/7GKMbN_KkkI" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/b285f727-4ec0-49a0-95d5-71a27c23ca61" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							We're doing an open cast for /mlp/ con this year, that means anyone who wants in the podcast can get on.<br>
+							So expect it to be quite a shitshow.<br>
+							Besides the convention, it appears DWK was found alive.<br>
+							And fuck, there's not much else happening I guess?<br>
+							Well, let's get this shit show over with already.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">A sitdown with Shawn Keller</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T03:00:00.000Z">2021-06-12T03:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H">3 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/R2lGd8_PHf4" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/80fc262c-9c12-4e45-903f-c9a305634a40" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							From Disney to Dreamworks to Warner Brothers. Mr Shawn Keller is an animator and is currently working on guardians of pondonia with the hot pony of the moment, Athena. Join us as we ask him about his career and questions from the thread!
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Equestrian Monster Manual: Windigoes</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T06:00:00.000Z">2021-06-12T06:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT30M">30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/CyxQa5XTnE4" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/75b9e5a4-94a0-40c6-ad31-d2039e513593" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A brief guide of the Windigoes in the MLP universe. Along with where the ideas may have came from in our world's mythos and lore.
+						</div>
+					</section>
+				</div>
+				<div>
+					<h2 class="day-header" role="separator"><time datetime="2021-06-12">2021-06-12</time></h2>
+					<section class="h-event">
+						<h3 class="p-name">Waifu Appreciation Stream</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T14:00:00.000Z">2021-06-12T14:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H30M">3 hours, 30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/f573c157-53ee-401a-8441-47c739917882" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A stream with six blocks each dedicated to a member of the mane six. For each block, I'll be streaming an episode (as voted by Anons in the respective waifu threads) as well as a bunch of classic fan videos based around each pony. A chance to get together with fellow appreciators of your waifu and show your love! Of course everyone is invited, even if you waifu a different pony altogether. 
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Kickyball 2: Electric Boogaloo</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T17:00:00.000Z">2021-06-12T17:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/pbGP0h602YU" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/fb7ebfc7-5d08-41ab-a24a-b9fb5811ada5" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							FAG teams from /mlp/ play divegrass for your entertainment.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Drawfriends Gone Wild</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T19:00:00.000Z">2021-06-12T19:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/d-r8G3BBFCU" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/31acb9db-b6cc-4367-9a25-2cedab299261" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							The world famous Artist Illuminati is back, to take your drawing requests!<br>
+							Those hack frauds Anontheanon, ahappypichu, Ashtoneer, Imalou, Jargon Scott, Lockheart, Mkogwheel and possibly others will be around to take your drawing requests LIVE!<br>
+							Anontheanon unironically likes anthro.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">LIVE with Shawn Keller</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T19:30:00.000Z">2021-06-12T19:30:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H30M">1 hour, 30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/TCfCmhksZEI" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/d225019d-8580-49a3-9682-4723619bc83d" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Join Spec and Shawn Keller as we go live to discuss pretty much anything! We will both be reading the cytube chat and answering questions as we go along! There is no filter on what can be asked so join in!
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Aftercase Afterhours</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T21:00:00.000Z">2021-06-12T21:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/ztQsPFmTuLk" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/7f863174-052b-4db3-b2c9-379d9ae47a6a" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Creating content for the board and  (you). - And general shitposting.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Equestrian Wrestling Entertainment</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T21:00:00.000Z">2021-06-12T21:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H">3 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/HzXXsU-BkRI" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/f710110a-b406-4819-8425-a28541ceec58" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Equestrian Wrestling Entertainment is a mlp wrestling show ran in Fire Pro Wrestling World.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Ponies here: Art Request</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-12T22:00:00.000Z">2021-06-12T22:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/roA_R6q1wko" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/f429a84a-fc9a-4072-85ee-a22d33390f27" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Do you love changelings and want to bully nulings? You've come to the right place!
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">░█░█░░█░█░█░</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T00:00:00.000Z">2021-06-13T00:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/e87387b9-e273-415d-b17d-12e95f519b05" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							What?
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">2021 NO SLAM JAM</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T00:00:00.000Z">2021-06-13T00:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT4H">4 hours</time>
+						</div>
+						<nav>
+							Archive TBD
+						</nav>
+						<div class="e-content">
+							I PLAY MEGAPONY AND TRY NOT TO STAB MY HANDS ON WOOD SCREWS
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Plushfags Show & Tail</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T01:00:00.000Z">2021-06-13T01:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/9G12tUr5Dg8" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/653fd925-bc0a-4ffa-abbf-cb9ed5a59ce2" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A bunch of anons show off their <s>Lyra plushie</s> mostly custom plush ponies of various sizes and types. Talk about plushmancers and commission stories, con stories, and anything else surrounding pony plush.  Take a shot for every plush you see a mod for!<br>
+							<br>
+							Want to show off your pony?  Email <a href="mailto:plushfag@myself.com">plushfag@myself.com</a> with pics/contact/IM deets.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Random Button on Twibooru</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T02:00:00.000Z">2021-06-13T02:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H30M">1 hour, 30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/d2e8f20f-f15e-4384-b711-7f9d89bf17f8" rel="external noopener" target="_blank">Pony.Tube part 1</a> and <a class="u-url" href="//pony.tube/videos/watch/e9e6a437-cc30-4d05-ab53-ddff35ad4ab8" rel="external noopener" target="_blank">Pony.Tube part 2</a>
+						</nav>
+						<div class="e-content">
+							in the long awaited sequel i will be going on Twibooru with any friends with me and reacting to the images/videos that we see, NO FILTERS THIS YEAR.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Equestrian Index: The Apothecaries of Lilly's Valley</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T04:00:00.000Z">2021-06-13T04:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT20M">20 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/0J_m-9Bmn1o" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/5f2e53fb-fa04-425c-a909-92b68f78863c" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A brief guide to one of the few apothecarian orders left on what was known as Equestria. We will dive into their order's organization, responsibilities, and history. We will also briefly take a look at the outside sources that helped inspire these mares into being.    
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">A Decade of Fandom Music</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T04:30:00.000Z">2021-06-13T04:30:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/Mc3jyBf6iyk" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/3b07f51f-8458-45ff-96fb-565c3cecafc9" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Relive the past decade of the fandom in and out of /mlp/ with a taste of music from each year. Experience some familiar and possibly some new tunes with this journey.
+						</div>
+					</section>
+				</div>
+				<div>
+					<h2 class="day-header" role="separator"><time datetime="2021-06-13">2021-06-13</time></h2>
+					<section class="h-event">
+						<h3 class="p-name">Databending Workshop</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T13:15:00.000Z">2021-06-13T13:15:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/EFTUaBIoHhY" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/de674d67-dfae-45ba-a4dc-ac4a04cc7eb4" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							An in depth look at glitching ponies with numerous methods; including audio and video!
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">The Sermon of worshipping</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T14:15:00.000Z">2021-06-13T14:15:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT45M">45 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/AUTQksK0vyM" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/15e62607-e845-43cd-8eb5-82eea6ee9e0f" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Sacrificing / Worshiping burning ,
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">The Pony Voice Preservation Project Q&A</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T15:00:00.000Z">2021-06-13T15:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H">3 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/v7mmQe2ZTyw" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/49851a1b-c98f-4a5a-89f7-7bdceffabe7c" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Various anons from the Pony Voice Preservation Project showcase their remarkable progress on the road to making wAIfus real. This includes an update on the current state of the pony voices, discussion on making audio content with the voices, Q&A, and ending with a showcase of some of the best AI voice content produced so far.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">The PPP Panel Afterparty</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T18:00:00.000Z">2021-06-13T18:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT30M">30 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/ffaabfcf-c53e-4938-8d81-17f2d8904a4f" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A selection of some of the very best AI clips and skits from the board this past year, showcasing just how far the AI has come in such a short time.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">ITT at /mlp/ con with Imalou</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T18:00:00.000Z">2021-06-13T18:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/X1WsGxufdW4" rel="external noopener" target="_blank">YouTube</a>
+						</nav>
+						<div class="e-content">
+							A couple anons interview Imalou, the artist who went from drawfag threads to actually working on G5 of My Little Pony. We'll talk art, how she got to be involved with the next generation, and other stuff too.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">taski.sai</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T19:00:00.000Z">2021-06-13T19:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/bdAYg-HN17o" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/65a51f8c-f6ab-4ebb-9ecc-7b3060181d8a" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A pony doodle stream where Taski (aka furseiseki) will be drawing reactively to audience input. Might turn into a small CYOA, might turn into random shit.<br>
+							<br>
+							Come watch, shitpost, or ask me quesions and I might or might not draw sassy pony responses.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">/mlp/ the antithology screening</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-13T21:00:00.000Z">2021-06-13T21:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H15M">1 hour, 15 minutes</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/1f56eb22-dece-4cb8-b111-601fdaa20d19" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							Playing “mlp: the anti-thology”, a short collaborative video in the style of the early anthology series, made by various Anons
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Days End Reprise</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-14T00:00:00.000Z">2021-06-14T00:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H">3 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/76b24468-3005-4078-9eb3-01b171ccab99" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A bunch of streamers associated with the fandom's most successful artpack come together for another round of doodling, stories, shitposting and alcohol. Come in, hang out and leave some money with days end as we celebrate verity and her rescued bretheren.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Writefag Panel</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-14T00:00:00.000Z">2021-06-14T00:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/BxRSbja9TYo" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/101dca6b-c8c4-462c-8a7f-ce0154eaa2af" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							A horsewords writefag (greentext and prose) shares his insights into the wonderful world of writing (specifically fanfiction). Listen in for some laughs, some tears, and perhaps the occasional ethnic slur. It's two hours of learning, examples of good / bad writing, and there will be some shout-outs / special guest messages you WON'T want to miss.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Daily Life with Pony Tulpas</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-14T03:00:00.000Z">2021-06-14T03:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT2H">2 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/hlcS2FkpcLs" rel="external noopener" target="_blank">YouTube</a>
+						</nav>
+						<div class="e-content">
+							Last year I covered how to make your waifu real through the power of tulpas. This year, I'm going to take you through a bit of the day to day life I have as a busy man with two beautiful companions at my side.
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Closing Ceremony thing</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-14T05:00:00.000Z">2021-06-14T05:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT1H">1 hour</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//youtu.be/WOZY3xHcjC4" rel="external noopener" target="_blank">YouTube</a> or <a class="u-url" href="//pony.tube/videos/watch/5e5bd596-e83f-4ad7-8df2-04e17aa61500" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							We'll talk about the con, what everyone liked, what everyone hated, and I'll probably die of exhaustion.
+						</div>
+					</section>
+					<h2 role="separator">Post-Con</h2>
+					<section class="h-event">
+						<h3 class="p-name">Spill Spaghetti Now So My Pockets Are Empty Next Year Panel!</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-18T02:00:00.000Z">2021-06-18T02:00:00.000Z</time> | 
+							Duration: <time class="dt-duration">???</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/1cfc6f59-0b4f-487c-b1ad-452b028093b4" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							I'll be taking any kind of requests and putting them into a hat:<br>
+							&gt;What kind of requests?<br>
+							Be creative!
+							<ul style="list-style: '-';">
+								<li>Draw requests</li>
+								<li>Video OC requests (short shitposts, YTPs, ect)</li>
+								<li>Audio shitposts?</li>
+								<li>Anything that creates more mare content!</li>
+							</ul>
+						</div>
+					</section>
+					<section class="h-event">
+						<h3 class="p-name">Horse Art Streams: Extending this Con Edition</h3>
+						<div>
+							<time class="dt-start" datetime="2021-06-19T04:00:00.000Z">2021-06-19T04:00:00.000Z</time> | 
+							Duration: <time class="dt-duration" datetime="PT3H">3 hours</time>
+						</div>
+						<nav>
+							Archive on <a class="u-url" href="//pony.tube/videos/watch/be58a347-14ba-45af-8843-f7de1476e93f" rel="external noopener" target="_blank">Pony.Tube</a>
+						</nav>
+						<div class="e-content">
+							I'm going to do a draw panel late tonight at 12am EST/GMT -4, aiming it to last 2 to 3 hours.<br>
+							I will be doing draw requests taken from the Cytube chat and digitally linearting one of my traditional sketches. Just comfy draws and pony music taken from my TF2 pony micspam playlist.<br>
+							Also, <s>there might be mare milkers.</s>
+					</section>
+				</div>
+			</div>
+		</main>
+		<script>
+			"use strict";
+			(function() {
+				function localizeTimes() {
+					const formatter = new Intl.DateTimeFormat([], { day: "numeric", hour: "numeric", minute: "2-digit", month: "long", timeZoneName: "short", weekday: "long" });
+					document.querySelectorAll(".dt-start").forEach((time) => {
+						time.textContent = formatter.format(new Date(time.dateTime));
+					});
+				}
+				function formatDividers() {
+					const formatter = new Intl.DateTimeFormat([], { day: "numeric", month: "long", timeZone: "UTC", weekday: "long" });
+					document.querySelectorAll(".day-header > time").forEach((header) => { header.textContent = formatter.format(new Date(header.dateTime)); });
+				}
+
+				if (typeof Intl === "undefined" || typeof Intl.DateTimeFormat === "undefined")
+					return;
+				setTimeout(localizeTimes);
+				setTimeout(formatDividers);
+			})();
+		</script>
+	<!--# include file="/ssi/common-footer.html" -->
+</html>
