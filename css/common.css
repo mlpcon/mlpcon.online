@@ -60,7 +60,7 @@ body {
 	background-size: cover;
 	overflow: hidden;
 	
-	font-family: Comic, cursive;
+	font-family: Comic;
 	color: <!--# echo var="fg-color" -->;
 	-webkit-font-feature-settings: "kern" 1;
 	font-kerning: normal;

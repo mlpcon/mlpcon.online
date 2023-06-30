@@ -60,7 +60,7 @@
 }
 /* generic */
 body, .p-name {
-	font-family: Comic, cursive;
+	font-family: Comic;
 	-webkit-font-feature-settings: "kern" 1;
 	font-kerning: normal;
 }
@@ -76,7 +76,7 @@ textarea { tab-size: 4; }
 .h-event { margin-bottom: 1em; }
 details.h-event { display: inline-block; }
 .motd-header {
-	font-family: Woodrow, cursive;
+	font-family: Woodrow;
 	font-weight: normal;
 	letter-spacing: 0.05em;
 }
