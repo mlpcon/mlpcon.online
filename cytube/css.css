@@ -59,7 +59,7 @@
 }
 /* generic */
 body, .p-name {
-	font-family: Comic, cursive;
+	font-family: Comic;
 	-webkit-font-feature-settings: "kern" 1;
 	font-kerning: normal;
 }
@@ -82,7 +82,7 @@ video.embedded { display: block; }
 .h-event { margin-bottom: 1em; }
 details.h-event { display: inline-block; }
 .motd-header {
-	font-family: Woodrow, cursive;
+	font-family: Woodrow;
 	font-weight: normal;
 	letter-spacing: 0.05em;
 }
@@ -140,7 +140,7 @@ span.shout > strong { font-weight: normal; }
 	width: auto;
 	transition-duration: 1s; 
 
-	background-image: url("/image/anon.png");
+	background-image: url("https://mlpcon.online/image/anon.png");
 	background-position: left bottom;
 	background-repeat: no-repeat;
 	background-size: 90% auto;
@@ -159,7 +159,7 @@ span.shout > strong { font-weight: normal; }
 	font-weight: bold !important;
 }
 
-.userlist_owner {
+.userlist_owner, .userlist_siteadmin {
 	color: #ef4f91 !important;
 	font-weight: bold !important;
 }
