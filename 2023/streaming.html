@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+	<!--# set value="Streaming" var="pageName" -->
+	<!--# set value="streaming.html" var="pageUrl" -->
+	<!--# set value="Suggested streaming settings for /mlp/ con panelists." var="pageDescription" -->
+	<!--# include file="/ssi/common-header.html" -->
+		<style>
+			:root { --section-background-color: rgba(23, 32, 79, 0.6); }
+			body > main {
+				backdrop-filter: saturate(180%) blur(10px);
+				background-color: var(--section-background-color);
+				border-color: var(--section-background-color);
+				border-radius: 1em;
+				border-style: solid;
+				border-width: thin;
+				box-shadow: 0 0 0.5em var(--section-background-color);
+				display: unset;
+				margin: 2em;
+				padding: 0.25em 0.5em;
+			}
+			h1 { font-size: xxx-large; }
+			h2 { font-size: xx-large; }
+			h3 { font-size: x-large; }
+			h4 { font-size: large; }
+		</style>
+		<main>
+			<h1>Streaming</h1>
+			<h2>Suggested streaming settings for /mlp/ con panelists</h2>
+			<h3>Prerequisites</h3>
+			<ul>
+				<li>Reasonably <strong><em>fast Internet access</em></strong> (low-speed DSL may not work)</li>
+				<li>Highly recommend an <strong><em>Ethernet (cable) connection</em></strong> over WiFi!  Even the best WiFi connections can experience random latency spikes that will cause your stream to stutter!</li>
+				<li>We recommend you use <strong><em><a href="//obsproject.com/" rel="external noopener" target="_blank">OBS Studio</a></em></strong> (Free and Open Source Software) to stream your panels</li>
+				<li>If you want to save a copy of your panel, <strong><em>be sure to record it in OBS Studio</em></strong> (unless you are using YouTube)</li>
+			</ul>
+			<h3>Key Settings</h3>
+			When setting up OBS Studio, it's important to understand how your settings will affect the viewers of your stream.  This will vary based upon the streaming platform you plan to use.
+			<h4>YouTube</h4>
+			YouTube is able to reencode your video streams, so the limitation with this platform will be <strong><em>your computer hardware and network connection</em></strong>.  Make sure your settings in OBS Studio do not overwhelm your hardware or network connection.  This may take trial and error.  You will want to stream to an unlisted YouTube stream and have a friend (or me, I'm available to help) work with you to test your stream and make sure it looks okay.  YouTube <a href="//support.google.com/youtube/answer/2853702?hl=en" rel="external noopener" target="_blank">has a page</a> that lists recommended bitrates based on your desired resolution and framerate.  It's recommended you follow their recommendations and use the highest bitrate your equipment can handle.
+			<h4>Other Platforms</h4>
+			If you are planning to stream using <a href="//pon3.stream/" rel="external noopener" target="_blank">pon3.stream</a> or <a href="//angelthump.com/" rel="external noopener" target="_blank">AngelThump</a>, your video stream <strong><em>will not be reencoded</em></strong>, so you must stream with a resolution and bitrate that will not overwhelm <em>your viewer's network connection</em>.  The following settings in OBS Studio are recommended (feel free to lower the bitrate or resolution if you so desire or if your equipment cannot handle these recommendations):
+			<ul>
+				<li>Bitrate: 1500Kbps (maximum: 2500Kbps, use caution with going this high, you will likely get complaints from people with shitty Internet connections)</li>
+				<li>Rescale Output: 1280x720 (or lower)</li>
+			</ul>
+			<aside>
+				Example of minimum OBS Studio settings using the default x264 encoder:<br>
+				<img src="//u.smutty.horse/mhtzkbskaux.png">
+			</aside>
+			<aside>
+				Example of minimum OBS Studio settings using the NVIDIA NVENC H.264 encoder:<br>
+				<img src="//u.smutty.horse/mhtzjvjijce.png">
+			</aside>
+			As above, <strong><em>you should test your settings before con weekend</em></strong>.  Start a stream and get a friend to watch and make sure it looks okay to them.  If you don't have a friend, I can always help!  (Unless it's con weekend, once con begins I'll be way too busy to do something like that.)  If you have any questions, please let me know.
+		</main>
+	<!--# include file="/ssi/common-footer.html" -->
+</html>
