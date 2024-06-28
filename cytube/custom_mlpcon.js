@@ -43,15 +43,15 @@ void function(transmutors){
 	})
 }({
 	//':emote:' : { sound: { url: 'link', vol: 1.00 }, transmote: ':some.other.emote:', custom: function(target){ code; } },
-	":numget:": { sound: {url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1.00 } }
-/*
-	':feel:'      : { transmote: ':feelsgood:' },
-	':feelsgood:' : { transmote: ':feel:'      },
-	':what:'      : { transmote: ':good.show:' },
-	':good.show:' : { transmote: ':what:'      },
+	":numget:": { sound: {url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1.00 } },
 
-	':hahahahahahahahaha:' : { sound: { url: 'https://resources.pink.horse/sounds/fenneko.ogg',             vol: 0.33 } },
-	':twss:'               : { sound: { url: 'https://resources.pink.horse/sounds/thats.what.she.said.ogg', vol: 0.75 } },
+	// ':feel:'      : { transmote: ':feelsgood:' },
+	// ':feelsgood:' : { transmote: ':feel:'      },
+	// ':what:'      : { transmote: ':good.show:' },
+	// ':good.show:' : { transmote: ':what:'      },
+
+	// ':hahahahahahahahaha:' : { sound: { url: 'https://resources.pink.horse/sounds/fenneko.ogg',             vol: 0.33 } },
+	// ':twss:'               : { sound: { url: 'https://resources.pink.horse/sounds/thats.what.she.said.ogg', vol: 0.75 } },
 	':laughingponywhores:' : { sound: { url: 'https://resources.pink.horse/sounds/pp.giggle.ogg',           vol: 0.33 } },
 	':sadpinkie:'          : { sound: { url: 'https://resources.pink.horse/sounds/pp.oh.no.ogg',            vol: 0.33 } },
 	':suspicious:'         : { sound: { url: 'https://resources.pink.horse/sounds/pp.suspicious.ogg',       vol: 0.33 } },
@@ -73,40 +73,39 @@ void function(transmutors){
 	':tree:'               : { sound: { url: 'https://xaekai.net/niggers.tree.ogg',                         vol: 0.88 } },
 
 
-	':uguu:'               : { custom: ()=>{ window[CHANNEL.altName].uguu.play() } },
+	// ':uguu:'               : { custom: ()=>{ window[CHANNEL.altName].uguu.play() } },
 
-	':gmew:'               : { custom: (target)=>{
-		if($(target).attr('src').includes('wew')){
-			$(target).attr('src','https://resources.pink.horse/images/emotes/toriel.pie.png')
-		}else{
-			$(target).attr('src','https://resources.pink.horse/images/emotes/toriel.wew.png')
-		}
-	} },
+	// ':gmew:'               : { custom: (target)=>{
+	// 	if($(target).attr('src').includes('wew')){
+	// 		$(target).attr('src','https://resources.pink.horse/images/emotes/toriel.pie.png')
+	// 	}else{
+	// 		$(target).attr('src','https://resources.pink.horse/images/emotes/toriel.wew.png')
+	// 	}
+	// } },
 
-	':awoo.shuffle:'       : { custom: (target)=>{
-		if($(target).attr('src').includes('back')){
-			$(target).attr('src','https://resources.pink.horse/images/emotes/momijidance.trans.gif')
-		}else{
-			$(target).attr('src','https://resources.pink.horse/images/emotes/momijidance.back.trans.gif')
-		}
-	} },
+	// ':awoo.shuffle:'       : { custom: (target)=>{
+	// 	if($(target).attr('src').includes('back')){
+	// 		$(target).attr('src','https://resources.pink.horse/images/emotes/momijidance.trans.gif')
+	// 	}else{
+	// 		$(target).attr('src','https://resources.pink.horse/images/emotes/momijidance.back.trans.gif')
+	// 	}
+	// } },
 
 
 	':marestare:'          : { morph: { url: 'https://resources.pink.horse/images/emotes/maregaze.png', title: ':marestare:' } },
-	':succ:'               : { morph: { url: 'https://resources.pink.horse/images/emotes/succ.super.png', title: 'ssucc?' } },
-	'ssucc?'               : { transmote: ':succ:',  sound: { url: 'https://resources.pink.horse/sounds/succ.mp3', vol: 0.33 } },
+	// ':succ:'               : { morph: { url: 'https://resources.pink.horse/images/emotes/succ.super.png', title: 'ssucc?' } },
+	// 'ssucc?'               : { transmote: ':succ:',  sound: { url: 'https://resources.pink.horse/sounds/succ.mp3', vol: 0.33 } },
 
-	':chen:'     : { 
-		morph: { title: 'alpha chen', url: 'https://resources.pink.horse/images/emotes/chen2.gif' },
-		sound: { url: 'https://resources.pink.horse/sounds/chen.ogg', vol: 0.33 }
-	},
-	'alpha chen' : {
-		morph: { title: 'omega chen', url:'https://resources.pink.horse/images/emotes/chen3.gif'},
-		sound: { url: 'https://resources.pink.horse/sounds/trainhorn-k5la.ogg', vol: 0.33 }
-	},
-	'omega chen' : { 
-		transmote: ':chen:',
-		sound: { url: 'https://resources.pink.horse/sounds/ship.fog.horn.air.chime.ogg', vol: 0.33 }
-	},
-	*/
+	// ':chen:'     : { 
+	// 	morph: { title: 'alpha chen', url: 'https://resources.pink.horse/images/emotes/chen2.gif' },
+	// 	sound: { url: 'https://resources.pink.horse/sounds/chen.ogg', vol: 0.33 }
+	// },
+	// 'alpha chen' : {
+	// 	morph: { title: 'omega chen', url:'https://resources.pink.horse/images/emotes/chen3.gif'},
+	// 	sound: { url: 'https://resources.pink.horse/sounds/trainhorn-k5la.ogg', vol: 0.33 }
+	// },
+	// 'omega chen' : { 
+	// 	transmote: ':chen:',
+	// 	sound: { url: 'https://resources.pink.horse/sounds/ship.fog.horn.air.chime.ogg', vol: 0.33 }
+	// },
 });
