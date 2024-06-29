@@ -5,7 +5,7 @@
 	{"name":"strike","source":"~~(.+?)~~","flags":"g","replace":"<s> \\1 </s>","active":true,"filterlinks":false},
 	{"name":"inline spoiler","source":"\\[sp(?:oiler)?\\](.*?)\\[\\/sp(?:oiler)?\\]","flags":"gi","replace":"<span class=\"spoiler\">\\1</span>","active":true,"filterlinks":false},
 	{"name":"colors","source":"ssc:([^ ]+) (.*)","flags":"g","replace":"<span style=\"color:\\1;\">\\2</span>","active":true,"filterlinks":false},
-	{"name":"image embed","source":"(https?:\\/\\/[^ ]+.(?:jpg|png|jpeg|apng|avif|gif|svg|webp))\\.(?:pic|img)","flags":"gi","replace":"<a href=\"\\1\" rel=\"noopener noreferrer\" target=\"_blank\"><img class=\"embedded\" referrerpolicy=\"no-referrer\" src=\"\\1\"></a>","active":true,"filterlinks":true},
+	{"name":"image embed","source":"(https?:\\/\\/[^ ]+.(?:jpg|png|jpeg|apng|avif|gif|svg|webp))\\.(?:pic|img)","flags":"gi","replace":"<a href=\"\\1\" rel=\"noopener noreferrer\" target=\"_blank\"><img class=\"embedded\" src=\"\\1\"></a>","active":true,"filterlinks":true},
 	{"name":"video embed","source":"(https?:\\/\\/[^ ]+.(?:m4v|mp4|ogv|webm))\\.(?:vid)","flags":"gi","replace":"<video src=\"\\1\"></video>","active":true,"filterlinks":true},
 	{"name":"image embed ipfs","source":"(https://cloudflare-ipfs.com/ipfs/[A-Za-z0-9]+)\\.(?:pic|img)","flags":"gi","replace":"<img class=\"embedded\" src=\"\\1\">","active":true,"filterlinks":true},
 	{"name":"flip","source":"\\[flip\\](.+)\\[\\/flip\\]","flags":"g","replace":"<span style=\"translate: scaleX(-1);\">\\1</span>","active":false,"filterlinks":true},
