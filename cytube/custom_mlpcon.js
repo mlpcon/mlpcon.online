@@ -44,7 +44,7 @@ void function(transmutors){
 }({
 	//':emote:' : { sound: { url: 'link', vol: 1.00 }, transmote: ':some.other.emote:', custom: function(target){ code; } },
 	":numget:": { sound: { url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1.00 } },
-	":zigger":, { sound: { url: "https://mlpcon.online/audio/zigger.ogg", vol: 0.33 } },
+	":zigger": { sound: { url: "https://mlpcon.online/audio/zigger.ogg", vol: 0.33 } },
 
 	// ':feel:'      : { transmote: ':feelsgood:' },
 	// ':feelsgood:' : { transmote: ':feel:'      },
