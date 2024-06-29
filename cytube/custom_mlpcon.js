@@ -43,8 +43,9 @@ void function(transmutors){
 	})
 }({
 	//':emote:' : { sound: { url: 'link', vol: 1.00 }, transmote: ':some.other.emote:', custom: function(target){ code; } },
-	":numget:": { sound: { url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1.00 } },
+	":numget:": { sound: { url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1 } },
 	":zigger:": { sound: { url: "https://mlpcon.online/audio/zigger.ogg", vol: 0.33 } },
+	":ilovethem:": { sound: { url: "https://mlpcon.online/audio/ilovethem.flac", vol: 1 } },
 
 	// ':feel:'      : { transmote: ':feelsgood:' },
 	// ':feelsgood:' : { transmote: ':feel:'      },
