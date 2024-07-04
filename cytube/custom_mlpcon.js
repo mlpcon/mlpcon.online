@@ -59,7 +59,6 @@ void function(transmutors){
 	':sadpinkie:'          : { sound: { url: 'https://resources.pink.horse/sounds/pp.oh.no.ogg',            vol: 0.33 } },
 	':suspicious:'         : { sound: { url: 'https://resources.pink.horse/sounds/pp.suspicious.ogg',       vol: 0.33 } },
 	':forever:'            : { sound: { url: 'https://resources.pink.horse/sounds/forever.ogg',             vol: 0.33 } },
-	':books:'              : { sound: { url: 'https://resources.pink.horse/sounds/by.the.book.ogg',         vol: 0.33 } },
 	':cry:'                : { sound: { url: 'https://resources.pink.horse/sounds/howcouldthishappen.ogg',  vol: 0.33 } },
 	':wahaha:'             : { sound: { url: 'https://resources.pink.horse/sounds/wahahaha.ogg',            vol: 0.33 } },
 	':ew.scoot:'           : { sound: { url: 'https://resources.pink.horse/sounds/ewwww.ogg',               vol: 0.33 } },
