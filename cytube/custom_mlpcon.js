@@ -46,6 +46,7 @@ void function(transmutors){
 	":numget:": { sound: { url: "https://mlpcon.online/audio/boowomp.mp3", vol: 1 } },
 	":zigger:": { sound: { url: "https://mlpcon.online/audio/zigger.ogg", vol: 0.33 } },
 	":ilovethem:": { sound: { url: "https://mlpcon.online/audio/ilovethem.flac", vol: 1 } },
+	":books:": { sound: { url: "https://mlpcon.online/audio/hahabook.mp3", vol: 1 } },
 
 	// ':feel:'      : { transmote: ':feelsgood:' },
 	// ':feelsgood:' : { transmote: ':feel:'      },
