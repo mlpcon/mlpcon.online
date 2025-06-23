@@ -122,6 +122,7 @@ span.shout > strong { font-weight: normal; }
 	flex-direction: row;
 	justify-content: space-evenly;
 }
+#motd #vendors { font-size: large; }
 
 /* Image Transforms by Xaekai */
 @import url("https://resources.pink.horse/css/img_fx.css");
