@@ -10,7 +10,176 @@ self.document.getElementById("usercount").innerText = userCountText.replace("use
 **|   channel is also displayed.
 **|
 **@preserve
-*/ (()=>{console.log("Hello from /mlp/ con\nSchedule script made by Wolvan");function e(e=0){if("number"!=typeof e)throw Error("Invalid duration");let t=Math.floor(e/864e5),s=Math.floor(t/365),n=t%365,r=Math.floor(e%864e5/36e5),i=Math.floor(e%36e5/6e4),o=Math.floor(e%6e4/1e3);return(s>0?s+" year"+(s>1?"s":""):"")+(n?n+" day"+(n>1?"s":"")+" ":"")+(r?r+" hour"+(r>1?"s":"")+" ":"")+(i?i+" minute"+(i>1?"s":"")+" ":"")+(o?o+" second"+(o>1?"s":""):"")}function t(e=""){if("string"!=typeof e||!e.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/))throw Error("Invalid duration");let[,t,s,n,r,i,o]=e.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);return((t?31536e3*parseInt(t):0)+(s?2592e3*parseInt(s):0)+(n?86400*parseInt(n):0)+(r?3600*parseInt(r):0)+(i?60*parseInt(i):0)+(o?parseInt(o):0))*1e3}function s(e=16,t="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"){return Array(e).fill("").map(()=>t[Math.floor(Math.random()*t.length)]).join("")}let n=this&&this.CHANNEL&&this.CHANNEL.name?this.CHANNEL.name:"",r="mlp-con"===n?"cytube1":"mlp-con2"===n?"cytube2":"",i="mlp-con"===n?"cytube2":"mlp-con2"===n?"cytube1":"";function o(e,t=()=>{}){let s=new Date,n=e.getTime()-s.getTime();n<=0?t():setTimeout(t,n)}async function a(){let e=await fetch("https://mlpcon.online/schedule?cache-buster="+s(),{cache:"no-store"}),n=await e.text(),r=$(n).find(".h-event").map(function(){let e=$(this);try{let s=t(e.find(".dt-duration").attr("datetime")),n=new Date(e.find(".dt-start").attr("datetime"));return{title:e.find(".p-name").text(),start:n,duration:s,durationString:e.find(".dt-duration").attr("datetime"),end:new Date(n.getTime()+s),description:e.find(".e-content").text().trim(),cytube1:"//cytu.be/r/mlp-con"===e.find(".u-url[href*='cytu.be']").attr("href"),cytube2:"//cytu.be/r/mlp-con2"===e.find(".u-url[href*='cytu.be']").attr("href"),rewatchCytube:"//cytu.be/r/MLPrewatchstream"===e.find(".u-url[href*='cytu.be']").attr("href")}}catch(r){return null}}).get().filter(e=>e);return r}function c(t,s){s||(s={title:"SEE YOU SPACE PONY",duration:31536e6,startText:"??:00 UTC",description:"See you next year, space pony."});let n=$("#"+t),r=n.find(".p-name .event-name"),i=n.find(".dt-start"),o=n.find(".dt-duration"),a=n.find(".e-content");r.text(s.title),i.text(s.startText||s.start.toLocaleString()),o.text(e(s.duration)),a.text(s.description)}function u(e){let t=new Date,s=e.find(e=>e.start.getTime()>t.getTime());return s}function l(e){let t={current:null,next:null},s=u(e),n=e.indexOf(s),r=e[(-1===n?e.length:n)-1];if(r){if(r.end<new Date&&s){let i=s.start-r.end;t.current={title:"Intermission",start:r.end,duration:i,end:new Date(r.end.getTime()+i),description:"Currently nothing is going on here, but check the alternate channel or wait for the next panel!",cytube1:r.cytube1,cytube2:r.cytube2,rewatchCytube:r.rewatchCytube}}else r.end<new Date?t.current=null:t.current=r}return t.next=s,t}async function d(){try{let e=await a(),t=e.filter(e=>e[r]),s=e.filter(e=>e[i]),{current:n,next:u}=l(t);n&&o(n.end,d),u&&o(u.start,d),c("event-current",n),c("event-next",u);let{current:h}=l(s);c("event-alt-channel",h),h&&o(h.end,d),console.log({currentEvent:n,nextEvent:u,altChannelEvent:h})}catch(m){console.log(m)}}setInterval(d,9e5),d()})(),this[CHANNEL.name]||(this[CHANNEL.name]={}),this[CHANNEL.name].branding||(this[CHANNEL.name].branding=$(".navbar-brand").html("").css({"background-image":'url("https://mlpcon.online/favicon.png")',"background-size":"100%",height:"50px","min-width":"50px"})),this[CHANNEL.name].favicon||(this[CHANNEL.name].favicon=$("<link/>").prop("id","favicon").attr("rel","shortcut icon").attr("type","image/png").attr("sizes","64x64").attr("href","https://mlpcon.online/favicon.png").appendTo("head")),/*!
+*/ 
+(() => {
+	console.log("Hello from /mlp/con\nSchedule script made by Wolvan");
+
+	const DEBUG_NOW = null; //new Date("2022-06-27T02:00:00.000+02:00");
+	const mlpconScheduleURL = "https://mlpcon.online/schedule";
+
+	function stringifyDuration(duration = 0) {
+		if (typeof duration !== "number") throw new Error("Invalid duration");
+		const days = Math.floor(duration / (24 * 60 * 60 * 1000));
+		const years = Math.floor(days / 365);
+		const remainingDays = days % 365;
+		const hours = Math.floor((duration % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+		const minutes = Math.floor((duration % (60 * 60 * 1000)) / (60 * 1000));
+		const seconds = Math.floor((duration % (60 * 1000)) / 1000);
+		return (years > 0 ? years + " year" + (years > 1 ? "s" : "") : "") +
+			(remainingDays ? remainingDays + " day" + (remainingDays > 1 ? "s" : "") + " " : "") +
+			(hours ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
+			(minutes ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
+			(seconds ? seconds + " second" + (seconds > 1 ? "s" : "") : "");
+	}
+	function parseISODuration(duration = "") {
+		if (typeof duration !== "string" || !duration.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/))
+			throw new Error("Invalid duration");
+		const [, years, months, days, hours, minutes, seconds] = duration.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+		return (
+			(years ? parseInt(years) * 365 * 24 * 60 * 60 : 0) +
+			(months ? parseInt(months) * 30 * 24 * 60 * 60 : 0) +
+			(days ? parseInt(days) * 24 * 60 * 60 : 0) +
+			(hours ? parseInt(hours) * 60 * 60 : 0) +
+			(minutes ? parseInt(minutes) * 60 : 0) +
+			(seconds ? parseInt(seconds) : 0)
+		) * 1000;
+	}
+	function randomString(length = 16, charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
+		return Array(length).fill("").map(() => charset[Math.floor(Math.random() * charset.length)]).join("");
+	}
+
+	const currentChannelName = this && this.CHANNEL && this.CHANNEL.name ? this.CHANNEL.name : "";
+	const currentChannel =
+		currentChannelName === "mlp-con" ? "cytube1" :
+		currentChannelName === "mlp-con2" ? "cytube2" :
+		"";
+	const altChannel =
+		currentChannelName === "mlp-con" ? "cytube2" :
+		currentChannelName === "mlp-con2" ? "cytube1" :
+		""
+
+	function runFunctionAtDate(date, func = () => {}) {
+		const now = new Date();
+		const diff = date.getTime() - now.getTime();
+		if (diff <= 0) {
+			func();
+		} else {
+			setTimeout(func, diff);
+		}
+	}
+
+	async function getSchedule() {
+		const response = await fetch(mlpconScheduleURL + "?cache-buster=" + randomString(), { cache: "no-store" });
+		const scheduleHTML = await response.text();
+		const events = $(scheduleHTML).find(".h-event").map(function() {
+			const event = $(this);
+			try {
+				const durationMs = parseISODuration(event.find(".dt-duration").attr("datetime"));
+				const start = new Date(event.find(".dt-start").attr("datetime"));
+				return {
+					title: event.find(".p-name").text(),
+					start,
+					duration: durationMs,
+					durationString: event.find(".dt-duration").attr("datetime"),
+					end: new Date(start.getTime() + durationMs),
+					description: event.find(".e-content").text().trim(),
+					cytube1: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/mlp-con",
+					cytube2: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/mlp-con2",
+					rewatchCytube: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/MLPrewatchstream",
+				}
+			} catch (error) {
+				return null;
+			}
+		}).get().filter(i => i);
+		return events;
+	}
+
+	function updateEventElement(element, event) {
+		if (!event) event = {
+			title: "SEE YOU SPACE PONY",
+			duration: 365 * 24 * 60 * 60 * 1000,
+			startText: "??:00 UTC",
+			description: "See you next year, space pony."
+		};
+		const el = $("#" + element);
+		const title = el.find(".p-name .event-name");
+		const startTime = el.find(".dt-start");
+		const duration = el.find(".dt-duration");
+		const summary = el.find(".e-content");
+
+		title.text(event.title);
+		startTime.text(event.startText || event.start.toLocaleString());
+		duration.text(stringifyDuration(event.duration));
+		summary.text(event.description);
+	}
+	function findNextEvent(events) {
+		const now = DEBUG_NOW || new Date();
+		const nextEvent = events.find(event => event.start.getTime() > now.getTime());
+		return nextEvent;
+	}
+	function getEvents(eventsArray) {
+		const events = {
+			current: null,
+			next: null
+		};
+		const nextEvent = findNextEvent(eventsArray);
+		const nextEventIndex = eventsArray.indexOf(nextEvent);
+		const currentEvent = eventsArray[(nextEventIndex === -1 ? eventsArray.length : nextEventIndex) - 1];
+		if (currentEvent) {
+			if (currentEvent.end < (DEBUG_NOW || new Date()) && nextEvent) {
+				const durationMs = nextEvent.start - currentEvent.end;
+				events.current = {
+					title: "Intermission",
+					start: currentEvent.end,
+					duration: durationMs,
+					end: new Date(currentEvent.end.getTime() + durationMs),
+					description: "Currently nothing is going on here, but check the alternate channel or wait for the next panel!",
+					cytube1: currentEvent.cytube1,
+					cytube2: currentEvent.cytube2,
+					rewatchCytube: currentEvent.rewatchCytube,
+				};
+			}
+			else if (currentEvent.end < (DEBUG_NOW || new Date())) events.current = null;
+			else events.current = currentEvent;
+		}
+		events.next = nextEvent;
+		return events;
+	}
+	async function updateSchedule() {
+		try {
+			const events = await getSchedule();
+			const eventsOnThisChannel = events.filter(event => event[currentChannel]);
+			const eventsOnAltChannel = events.filter(event => event[altChannel]);
+			
+			const {
+				current: currentEvent,
+				next: nextEvent
+			} = getEvents(eventsOnThisChannel);
+			if (currentEvent) runFunctionAtDate(currentEvent.end, updateSchedule);
+			if (nextEvent) runFunctionAtDate(nextEvent.start, updateSchedule);
+			updateEventElement("event-current", currentEvent);
+			updateEventElement("event-next", nextEvent);
+
+			const {
+				current: altChannelEvent
+			} = getEvents(eventsOnAltChannel);
+			updateEventElement("event-alt-channel", altChannelEvent);
+			if (altChannelEvent) runFunctionAtDate(altChannelEvent.end, updateSchedule);
+
+			console.log({
+				currentEvent,
+				nextEvent,
+				altChannelEvent
+			});
+		} catch (error) {
+			console.log(error);
+		}
+		// setTimeout(updateSchedule, 15 * 60 * 1000);
+	}
+	setInterval(updateSchedule, 15 * 60 * 1000);
+	updateSchedule();
+})();
+/*!
 **|   Xaekai's Sequenced Module Loader
 **|
 **@preserve
