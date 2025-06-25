@@ -12,40 +12,22 @@
 	console.log("Hello from /mlp/con\nSchedule script made by Wolvan");
 
 	const DEBUG_NOW = null; //new Date("2022-06-27T02:00:00.000+02:00");
-	const mlpconScheduleURL = "https://mlpcon.online/schedule";
+	const ISO_DURATION_REGEX = new self.RegExp(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+	const SCHEDULE_URL = "https://mlpcon.online/schedule";
 
-	function stringifyDuration(duration = 0) {
-		if (typeof duration !== "number") throw new Error("Invalid duration");
-		const days = Math.floor(duration / (24 * 60 * 60 * 1000));
-		const years = Math.floor(days / 365);
-		const remainingDays = days % 365;
-		const hours = Math.floor((duration % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-		const minutes = Math.floor((duration % (60 * 60 * 1000)) / (60 * 1000));
-		const seconds = Math.floor((duration % (60 * 1000)) / 1000);
-		return (years > 0 ? years + " year" + (years > 1 ? "s" : "") : "") +
-			(remainingDays ? remainingDays + " day" + (remainingDays > 1 ? "s" : "") + " " : "") +
-			(hours ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
-			(minutes ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
-			(seconds ? seconds + " second" + (seconds > 1 ? "s" : "") : "");
-	}
-	function parseISODuration(duration = "") {
-		if (typeof duration !== "string" || !duration.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/))
-			throw new Error("Invalid duration");
-		const [, years, months, days, hours, minutes, seconds] = duration.match(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-		return (
-			(years ? parseInt(years) * 365 * 24 * 60 * 60 : 0) +
-			(months ? parseInt(months) * 30 * 24 * 60 * 60 : 0) +
-			(days ? parseInt(days) * 24 * 60 * 60 : 0) +
-			(hours ? parseInt(hours) * 60 * 60 : 0) +
-			(minutes ? parseInt(minutes) * 60 : 0) +
-			(seconds ? parseInt(seconds) : 0)
-		) * 1000;
-	}
-	function randomString(length = 16, charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
-		return Array(length).fill("").map(() => charset[Math.floor(Math.random() * charset.length)]).join("");
-	}
+	const MINUTE_S = 60;
+	const HOUR_S = 60 * MINUTE_S;
+	const DAY_S = 24 * HOUR_S;
+	const MONTH_S = 30 * DAY_S;
+	const YEAR_S = 365 * DAY_S;
 
-	const currentChannelName = this && this.CHANNEL && this.CHANNEL.name ? this.CHANNEL.name : "";
+	const SECOND_MS = 1000;
+	const MINUTE_MS = SECOND_MS * MINUTE_S;
+	const HOUR_MS = SECOND_MS * HOUR_S;
+	const DAY_MS = SECOND_MS * DAY_S;
+	const YEAR_MS = SECOND_MS * YEAR_S;
+
+	const currentChannelName = self.CHANNEL?.name ?? "";
 	const currentChannel =
 		currentChannelName === "mlp-con" ? "cytube1" :
 		currentChannelName === "mlp-con2" ? "cytube2" :
@@ -54,6 +36,42 @@
 		currentChannelName === "mlp-con" ? "cytube2" :
 		currentChannelName === "mlp-con2" ? "cytube1" :
 		""
+
+	function stringifyDuration(duration = 0) {
+		if (typeof duration !== "number") 
+			throw new Error("Invalid duration");
+		const days = Math.floor(duration / (DAY_MS));
+		const years = Math.floor(days / 365);
+		const remainingDays = days % 365;
+		const hours = Math.floor((duration % (DAY_MS)) / (HOUR_MS));
+		const minutes = Math.floor((duration % (HOUR_MS)) / (MINUTE_MS));
+		const seconds = Math.floor((duration % (MINUTE_MS)) / SECOND_MS);
+		return (years > 0 ? years + " year" + (years > 1 ? "s" : "") : "") +
+			(remainingDays ? remainingDays + " day" + (remainingDays > 1 ? "s" : "") + " " : "") +
+			(hours ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
+			(minutes ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
+			(seconds ? seconds + " second" + (seconds > 1 ? "s" : "") : "");
+	}
+	function parseISODuration(duration = "") {
+		if (typeof duration !== "string" || !ISO_DURATION_REGEX.test(duration))
+			throw new Error("Invalid duration");
+		const [, years, months, days, hours, minutes, seconds] = duration.match(ISO_DURATION_REGEX);
+		return (
+			(years ? parseInt(years) * YEAR_S : 0) +
+			(months ? parseInt(months) * MONTH_S : 0) +
+			(days ? parseInt(days) * DAY_S : 0) +
+			(hours ? parseInt(hours) * HOUR_S : 0) +
+			(minutes ? parseInt(minutes) * MINUTE_S : 0) +
+			(seconds ? parseInt(seconds) : 0)
+		) * SECOND_MS;
+	}
+	function randomString(length = 16, charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
+		let result = "";
+
+		for (let i = 0; i < length; i++)
+			result += charset.charAt(self.Math.floor(self.Math.random() * charset.length));
+		return result;
+	}
 
 	function runFunctionAtDate(date, func = () => {}) {
 		const now = new Date();
@@ -66,7 +84,7 @@
 	}
 
 	async function getSchedule() {
-		const response = await fetch(mlpconScheduleURL + "?cache-buster=" + randomString(), { cache: "no-store" });
+		const response = await fetch(`${SCHEDULE_URL}?cache-buster=${randomString()}`, { cache: "no-store" });
 		const scheduleHTML = await response.text();
 		const events = $(scheduleHTML).find(".h-event").map(function() {
 			const event = $(this);
@@ -94,7 +112,7 @@
 	function updateEventElement(element, event) {
 		if (!event) event = {
 			title: "SEE YOU SPACE PONY",
-			duration: 365 * 24 * 60 * 60 * 1000,
+			duration: YEAR_MS,
 			startText: "??:00 UTC",
 			description: "See you next year, space pony."
 		};
@@ -171,16 +189,15 @@
 		} catch (error) {
 			console.log(error);
 		}
-		// setTimeout(updateSchedule, 15 * 60 * 1000);
 	}
-	setInterval(updateSchedule, 15 * 60 * 1000);
+	setInterval(updateSchedule, 15 * MINUTE_MS);
 	updateSchedule();
 })();
 /*!
 **|  CyTube Channel: MLPA External Script
 **|
 **|  All code written by Xaekai except where otherwise noted.
-**|  Modified for /mlp/con
+**|  Modified for /mlp/ con
 **|  Copyright 2014-2019 All Rights Reserved
 **|
 **@preserve
@@ -194,11 +211,8 @@ if (!this[CHANNEL.name].branding) {
 if (!this[CHANNEL.name].favicon) {
     this[CHANNEL.name].favicon = $("<link/>").prop("id", "favicon").attr("rel", "shortcut icon").attr("type", "image/png").attr("sizes", "64x64").attr("href", "https://mlpcon.online/favicon.png").appendTo("head")
 }
+
 /*!
-**|   Xaekai's Sequenced Module Loader
-**|
-**@preserve
-*/ /*!
 **|   Xaekai's Sequenced Module Loader
 **|
 **@preserve
@@ -245,7 +259,6 @@ if (!this[CHANNEL.name].favicon) {
 	sequencerLoader:function(){if(this.state.prev&&(setTimeout(this.modules[this.state.prev].done,0),this.state.prev=""),this.state.pos>=this.index.length)return console.info("[XaeModule]","Loading Complete.");var e=this.index[this.state.pos];if(this.state.pos<this.index.length){if(this.modules[e].active){if(this.modules[e].rank<=CLIENT.rank){console.info("[XaeModule]","Loading:",e),this.state.prev=e,this.state.pos++;let t=void 0===this.modules[e].cache?this.cache:this.modules[e].cache;this.getScript(this.modules[e].url,this.sequencerLoader.bind(this),t)}else 0===this.modules[e].rank&&-1===CLIENT.rank&&function(e){socket.once("login",t=>{t.success&&this.getScript(e.url,!1,this.cache)})}(this.modules[e]),this.state.pos++,this.sequencerLoader()}else this.state.pos++,this.sequencerLoader()}},
 	state:{prev:"",pos:0}
 }).initialize();
-/*customcode:{active:1,rank:-1,url:"https://resources.pink.horse/js/custom_mlpa.min.js",done:!0,cache:!1},*/
 
 // the4cdnMutationObserver written by fusedforms
 (() => {
