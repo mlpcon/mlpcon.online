@@ -275,5 +275,7 @@ if (!this[CHANNEL.name].favicon) {
 })();
 
 // finally...
-const userCountText = self.document.getElementById("usercount").innerText;
-self.document.getElementById("usercount").innerText = userCountText.replace("user", "anon");
+self.setTimeout(() => {
+	const userCountText = self.document.getElementById("usercount").innerText;
+	self.document.getElementById("usercount").innerText = userCountText.replace("user", "anon");
+}, 3000);
