@@ -1,7 +1,4 @@
 "use strict";
-const userCountText = self.document.getElementById("usercount").innerText;
-self.document.getElementById("usercount").innerText = userCountText.replace("user", "anon");
-
 /*!
 **|   Wolvan's /mlp/ con schedule loader
 **|   Pulls the schedule from the /mlp/ con website
@@ -276,3 +273,7 @@ if (!this[CHANNEL.name].favicon) {
 
 	new the4cdnMutationObserver().connect();
 })();
+
+// finally...
+const userCountText = self.document.getElementById("usercount").innerText;
+self.document.getElementById("usercount").innerText = userCountText.replace("user", "anon");
