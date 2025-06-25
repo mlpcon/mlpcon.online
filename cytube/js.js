@@ -180,6 +180,24 @@ self.document.getElementById("usercount").innerText = userCountText.replace("use
 	updateSchedule();
 })();
 /*!
+**|  CyTube Channel: MLPA External Script
+**|
+**|  All code written by Xaekai except where otherwise noted.
+**|  Modified for /mlp/con
+**|  Copyright 2014-2019 All Rights Reserved
+**|
+**@preserve
+*/
+if (!this[CHANNEL.name]) {
+    this[CHANNEL.name] = {}
+}
+if (!this[CHANNEL.name].branding) {
+    this[CHANNEL.name].branding = $(".navbar-brand").html("").css({"background-image": 'url("https://mlpcon.online/favicon.png")', "background-size": "100%", height: "50px", "min-width": "50px"})
+}
+if (!this[CHANNEL.name].favicon) {
+    this[CHANNEL.name].favicon = $("<link/>").prop("id", "favicon").attr("rel", "shortcut icon").attr("type", "image/png").attr("sizes", "64x64").attr("href", "https://mlpcon.online/favicon.png").appendTo("head")
+}
+/*!
 **|   Xaekai's Sequenced Module Loader
 **|
 **@preserve
