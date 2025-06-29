@@ -54,14 +54,14 @@
 			const existingFileContents = await fs.readFile(EMOTE_FAILURE_FILE, { encoding: "utf8" });
 			const existing = JSON.parse(existingFileContents ?? "[]");
 			existing.push({ date: new Date(), failed });
-			return fs.writeFile(EMOTE_FAILURE_FILE, JSON.stringify(existing, null, 4));
+			return fs.writeFile(EMOTE_FAILURE_FILE, JSON.stringify(existing, null, "\t"));
 		} catch (err) {
 			if (err.code !== "ENOENT")
 				throw err;
 		}
 	}
 
-	function writeSortedEmotes(emotes) { return fs.writeFile(EMOTE_FILE, JSON.stringify(emotes, null, 4)); }
+	function writeSortedEmotes(emotes) { return fs.writeFile(EMOTE_FILE, JSON.stringify(emotes, null, "\t")); }
 
 	async function main() {
 		try {
