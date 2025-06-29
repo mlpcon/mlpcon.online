@@ -287,6 +287,10 @@ if (!this[CHANNEL.name].favicon) {
 	new the4cdnMutationObserver().connect();
 })();
 
+// anonbot script written by fusedforms
+if (self.CHANNEL?.name === "mlp-con")
+	$.getScript("//bonnie.bluefast.horse/anonbot.js");
+
 // finally...
 self.setTimeout(() => {
 	const userCountText = self.document.getElementById("usercount").innerText;
