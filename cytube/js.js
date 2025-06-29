@@ -260,36 +260,36 @@ if (!this[CHANNEL.name].favicon) {
 	state:{prev:"",pos:0}
 }).initialize();
 
-// the4cdnMutationObserver written by fusedforms
-(() => {
-	class the4cdnMutationObserver {
-		connect() {
-			if (window.the4cdnMutationObserver) {
-				window.the4cdnMutationObserver.disconnect();
-			}
-			window.the4cdnMutationObserver = this;
-			if (window.MutationObserver) {
-				this.observer = new MutationObserver((mutations) =>
-					mutations.forEach(mutation => mutation.addedNodes.forEach((domNode) => this.mutateMsg(domNode))));
-				const chat = document.getElementById('messagebuffer');
-				$(chat).children().each((_, domNode) => this.mutateMsg(domNode));
-				this.observer.observe(chat, {childList: true});
-			}
-		}
-		disconnect() {
-			this.observer.disconnect();
-		}
-		mutateMsg(domNode) {
-			$(domNode).find('img').attr('referrerpolicy', 'no-referrer');
-		}
-	}
-
-	new the4cdnMutationObserver().connect();
-})();
-
 // anonbot script written by fusedforms
 if (self.CHANNEL?.name === "mlp-con")
 	$.getScript("//bonnie.bluefast.horse/anonbot.js");
+else
+	// the4cdnMutationObserver written by fusedforms
+	(() => {
+		class the4cdnMutationObserver {
+			connect() {
+				if (window.the4cdnMutationObserver) {
+					window.the4cdnMutationObserver.disconnect();
+				}
+				window.the4cdnMutationObserver = this;
+				if (window.MutationObserver) {
+					this.observer = new MutationObserver((mutations) =>
+						mutations.forEach(mutation => mutation.addedNodes.forEach((domNode) => this.mutateMsg(domNode))));
+					const chat = document.getElementById('messagebuffer');
+					$(chat).children().each((_, domNode) => this.mutateMsg(domNode));
+					this.observer.observe(chat, {childList: true});
+				}
+			}
+			disconnect() {
+				this.observer.disconnect();
+			}
+			mutateMsg(domNode) {
+				$(domNode).find('img').attr('referrerpolicy', 'no-referrer');
+			}
+		}
+
+		new the4cdnMutationObserver().connect();
+	})();
 
 // finally...
 self.setTimeout(() => {
