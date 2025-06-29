@@ -1,0 +1,19 @@
+{
+	"name": "cytube_helpers",
+	"version": "1.0.0",
+	"description": "Helper applications for CyTube maintenance",
+	"homepage": "https://github.com/mlpcon/mlpcon.online/tree/master/cytube/bin",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"author": "Twifag <op@mlpcon.online> (https://mlpcon.online)",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mlpcon/mlpcon.online.git",
+		"directory": "cytube/bin"
+	},
+	"type": "commonjs",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"private": true
+}

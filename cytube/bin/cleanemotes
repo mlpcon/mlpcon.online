@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+"use strict";
+
+(function() {
+	const fs = require("node:fs/promises");
+
+	const DELAY_BETWEEN_REQUESTS = 2 * 1000;
+	const EMOTE_FAILURE_FILE = "/home/otaku/GitHub/mlpcon.online/cytube/emotes_failed.json";
+	const EMOTE_FILE = "/home/otaku/GitHub/mlpcon.online/cytube/emotes.json";
+	const REQUEST_TIMEOUT = 30 * 1000;
+
+	async function checkEmoteUrl(emote) {
+		try {
+			const controller = new AbortController();
+			const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+			const response = await fetch(emote.image, { method: "GET", redirect: "follow", signal: controller.signal });
+			clearTimeout(timeout);
+
+			if (response.body && response.body.cancel)
+				response.body.cancel();
+			const success = response.ok;
+			return { name: emote.name, image: emote.image, status: response.status, success };
+		} catch (err) {
+			return { name: emote.name, image: emote.image, status: err.name === "AbortError" ? "timeout" : err.name, success: false };
+		}
+	}
+
+	async function filterEmotes(emotes) {
+		const failed = [];
+		const working = [];
+
+		for (const emote of emotes) {
+			const result = await checkEmoteUrl(emote);
+			console.debug(result);
+
+			if (result.success)
+				working.push(emote);
+			else
+				failed.push(result);
+			await sleep(DELAY_BETWEEN_REQUESTS);
+		}
+		console.debug("\n✅ All emotes filtered.");
+		return { failed, working };
+	}
+
+	function getEmotes() { return fs.readFile(EMOTE_FILE, { encoding: "utf8" }); }
+
+	function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+	function sortEmotes(emotes) { return emotes.sort((a, b) => a.name.localeCompare(b.name)); }
+
+	async function writeFailedEmotes(failed) {
+		try {
+			const existingFileContents = await fs.readFile(EMOTE_FAILURE_FILE, { encoding: "utf8" });
+			const existing = JSON.parse(existingFileContents ?? "[]");
+			existing.push({ date: new Date(), failed });
+			return fs.writeFile(EMOTE_FAILURE_FILE, JSON.stringify(existing, null, 4));
+		} catch (err) {
+			if (err.code !== "ENOENT")
+				throw err;
+		}
+	}
+
+	function writeSortedEmotes(emotes) { return fs.writeFile(EMOTE_FILE, JSON.stringify(emotes, null, 4)); }
+
+	async function main() {
+		try {
+			const emotes = JSON.parse(await getEmotes());
+			const { failed, working } = await filterEmotes(emotes);
+			const sorted = sortEmotes(working);
+			await writeSortedEmotes(sorted);
+			await writeFailedEmotes(failed);
+		} catch (err) { console.error(err); }
+	}
+
+	main();
+})();
