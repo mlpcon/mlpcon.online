@@ -1,19 +1,8 @@
 "use strict";
-/*!
-**|   Wolvan's /mlp/ con schedule loader
-**|   Pulls the schedule from the /mlp/ con website
-**|   and displays the current as well as next panel
-**|   in the MOTD. The current panel of the alternate
-**|   channel is also displayed.
-**|
-**@preserve
-*/ 
 (() => {
-	console.log("Hello from /mlp/con\nSchedule script made by Wolvan");
-
 	const DEBUG_NOW = null; //new Date("2022-06-27T02:00:00.000+02:00");
 	const ISO_DURATION_REGEX = new self.RegExp(/P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-	const SCHEDULE_URL = "https://mlpcon.online/schedule";
+	const SCHEDULE_URL = "https://mlpcon.online/schedule.json";
 
 	const MINUTE_S = 60;
 	const HOUR_S = 60 * MINUTE_S;
@@ -27,30 +16,88 @@
 	const DAY_MS = SECOND_MS * DAY_S;
 	const YEAR_MS = SECOND_MS * YEAR_S;
 
-	const currentChannelName = self.CHANNEL?.name ?? "";
-	const currentChannel =
-		currentChannelName === "mlp-con" ? "cytube1" :
-		currentChannelName === "mlp-con2" ? "cytube2" :
-		"";
-	const altChannel =
-		currentChannelName === "mlp-con" ? "cytube2" :
-		currentChannelName === "mlp-con2" ? "cytube1" :
-		""
+	const DEFAULT_EVENT = {
+		title: "SEE YOU SPACE PONY",
+		duration: YEAR_MS,
+		startText: "??:00 UTC",
+		description: "<p>See you next year, space pony.</p>"
+	};
 
-	function stringifyDuration(duration = 0) {
-		if (typeof duration !== "number") 
-			throw new Error("Invalid duration");
-		const days = Math.floor(duration / (DAY_MS));
-		const years = Math.floor(days / 365);
-		const remainingDays = days % 365;
-		const hours = Math.floor((duration % (DAY_MS)) / (HOUR_MS));
-		const minutes = Math.floor((duration % (HOUR_MS)) / (MINUTE_MS));
-		const seconds = Math.floor((duration % (MINUTE_MS)) / SECOND_MS);
-		return (years > 0 ? years + " year" + (years > 1 ? "s" : "") : "") +
-			(remainingDays ? remainingDays + " day" + (remainingDays > 1 ? "s" : "") + " " : "") +
-			(hours ? hours + " hour" + (hours > 1 ? "s" : "") + " " : "") +
-			(minutes ? minutes + " minute" + (minutes > 1 ? "s" : "") + " " : "") +
-			(seconds ? seconds + " second" + (seconds > 1 ? "s" : "") : "");
+	const currentChannelName = self.CHANNEL?.name ?? "";
+	const currentChannel = (() => {
+		switch (currentChannelName) {
+			case "mlp-con": return "1";
+			case "mlp-con2": return "2";
+			default: return "";
+		}
+	})();
+	const nextChannel = (() => {
+		switch (currentChannelName) {
+			case "mlp-con": return "2";
+			case "mlp-con2": return "1";
+			default: return "";
+		}
+	})();
+
+	function findNextEvent(events) {
+		const now = DEBUG_NOW || new Date();
+		const nextEvent = events.find(event => event.start.getTime() > now.getTime());
+		return nextEvent;
+	}
+	function getEvents(eventsArray) {
+		const events = {
+			current: null,
+			next: null
+		};
+		const nextEvent = findNextEvent(eventsArray);
+		const nextEventIndex = eventsArray.indexOf(nextEvent);
+		const currentEvent = eventsArray[(nextEventIndex === -1 ? eventsArray.length : nextEventIndex) - 1];
+
+		if (currentEvent) {
+			if (currentEvent.end < (DEBUG_NOW || new Date()) && nextEvent) {
+				const durationMs = nextEvent.start - currentEvent.end;
+				events.current = {
+					title: "Intermission",
+					start: currentEvent.end,
+					duration: durationMs,
+					end: new Date(currentEvent.end.getTime() + durationMs),
+					description: "Currently nothing is going on here, but check the other channel or wait for the next event!",
+					cytube1: currentEvent.cytube1,
+					cytube2: currentEvent.cytube2,
+					rewatchCytube: currentEvent.rewatchCytube
+				};
+			}
+			else 
+				if (currentEvent.end < (DEBUG_NOW || new Date())) 
+					events.current = null;
+				else 
+					events.current = currentEvent;
+		}
+		events.next = nextEvent;
+		return events;
+	}
+	async function getSchedule() {
+		try {
+			const response = await fetch(`${SCHEDULE_URL}?cache-buster=${randomString()}`, { cache: "no-store" });
+			const rawEvents = await response.json();
+			
+			return rawEvents.map(event => {
+				const start = new Date(event.startTime);
+				const durationMs = parseISODuration(event.duration);
+				return {
+					title: event.title,
+					start,
+					duration: durationMs,
+					end: new Date(start.getTime() + durationMs),
+					description: event.description,
+					rawDescription: event.rawDescription,
+					channel: event.channel
+				};
+			});
+		} catch (error) {
+			console.error("Failed to parse schedule JSON:", error);
+			return [];
+		}
 	}
 	function parseISODuration(duration = "") {
 		if (typeof duration !== "string" || !ISO_DURATION_REGEX.test(duration))
@@ -65,14 +112,14 @@
 			(seconds ? parseInt(seconds) : 0)
 		) * SECOND_MS;
 	}
-	function randomString(length = 16, charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
-		let result = "";
-
-		for (let i = 0; i < length; i++)
-			result += charset.charAt(self.Math.floor(self.Math.random() * charset.length));
-		return result;
+	function pluralizeWord(count, singular, plural = singular + "s") {
+		if (count === 1)
+			return singular;
+		return plural;
 	}
-
+	function randomString() {
+		return Math.random().toString(36).slice(2);
+	}
 	function runFunctionAtDate(date, func = () => {}) {
 		const now = new Date();
 		const diff = date.getTime() - now.getTime();
@@ -82,114 +129,93 @@
 			setTimeout(func, diff);
 		}
 	}
+	function stringifyDuration(duration = 0) {
+		if (typeof duration !== "number") 
+			throw new Error("Invalid duration");
+		const days = Math.floor(duration / (DAY_MS));
+		const years = Math.floor(days / 365);
+		const remainingDays = days % 365;
+		const hours = Math.floor((duration % (DAY_MS)) / (HOUR_MS));
+		const minutes = Math.floor((duration % (HOUR_MS)) / (MINUTE_MS));
+		const seconds = Math.floor((duration % (MINUTE_MS)) / SECOND_MS);
+		let output = "";
 
-	async function getSchedule() {
-		const response = await fetch(`${SCHEDULE_URL}?cache-buster=${randomString()}`, { cache: "no-store" });
-		const scheduleHTML = await response.text();
-		const events = $(scheduleHTML).find(".h-event").map(function() {
-			const event = $(this);
-			try {
-				const durationMs = parseISODuration(event.find(".dt-duration").attr("datetime"));
-				const start = new Date(event.find(".dt-start").attr("datetime"));
-				return {
-					title: event.find(".p-name").text(),
-					start,
-					duration: durationMs,
-					durationString: event.find(".dt-duration").attr("datetime"),
-					end: new Date(start.getTime() + durationMs),
-					description: event.find(".e-content").text().trim(),
-					cytube1: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/mlp-con",
-					cytube2: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/mlp-con2",
-					rewatchCytube: event.find(".u-url[href*='cytu.be']").attr("href") === "//cytu.be/r/MLPrewatchstream",
-				}
-			} catch (error) {
-				return null;
-			}
-		}).get().filter(i => i);
-		return events;
-	}
+		if (years > 0)
+			output += `${years} ${pluralizeWord(years, "year")} `;
 
-	function updateEventElement(element, event) {
-		if (!event) event = {
-			title: "SEE YOU SPACE PONY",
-			duration: YEAR_MS,
-			startText: "??:00 UTC",
-			description: "See you next year, space pony."
-		};
-		const el = $("#" + element);
-		const title = el.find(".p-name .event-name");
-		const startTime = el.find(".dt-start");
-		const duration = el.find(".dt-duration");
-		const summary = el.find(".e-content");
+		if (remainingDays)
+			output += `${remainingDays} ${pluralizeWord(remainingDays, "day")} `;
 
-		title.text(event.title);
-		startTime.text(event.startText || event.start.toLocaleString());
-		duration.text(stringifyDuration(event.duration));
-		summary.text(event.description);
+		if (hours)
+			output += `${hours} ${pluralizeWord(hours, "hour")} `;
+
+		if (minutes)
+			output += `${minutes} ${pluralizeWord(minutes, "minute")} `;
+
+		if (seconds)
+			output += `${seconds} ${pluralizeWord(seconds, "second")}`;
+
+		return output.trim();
 	}
-	function findNextEvent(events) {
-		const now = DEBUG_NOW || new Date();
-		const nextEvent = events.find(event => event.start.getTime() > now.getTime());
-		return nextEvent;
-	}
-	function getEvents(eventsArray) {
-		const events = {
-			current: null,
-			next: null
-		};
-		const nextEvent = findNextEvent(eventsArray);
-		const nextEventIndex = eventsArray.indexOf(nextEvent);
-		const currentEvent = eventsArray[(nextEventIndex === -1 ? eventsArray.length : nextEventIndex) - 1];
-		if (currentEvent) {
-			if (currentEvent.end < (DEBUG_NOW || new Date()) && nextEvent) {
-				const durationMs = nextEvent.start - currentEvent.end;
-				events.current = {
-					title: "Intermission",
-					start: currentEvent.end,
-					duration: durationMs,
-					end: new Date(currentEvent.end.getTime() + durationMs),
-					description: "Currently nothing is going on here, but check the alternate channel or wait for the next panel!",
-					cytube1: currentEvent.cytube1,
-					cytube2: currentEvent.cytube2,
-					rewatchCytube: currentEvent.rewatchCytube,
-				};
-			}
-			else if (currentEvent.end < (DEBUG_NOW || new Date())) events.current = null;
-			else events.current = currentEvent;
-		}
-		events.next = nextEvent;
-		return events;
+	function updateEventElement(elementId, event) {
+		if (!event) 
+			event = DEFAULT_EVENT;
+		const element = document.getElementById(elementId);
+
+		if (!element)
+			return;
+		const titleElement = element.querySelector(".p-name .event-name");
+		const startTimeElement = element.querySelector(".dt-start");
+		const durationElement = element.querySelector(".dt-duration");
+		const summaryElement = element.querySelector(".e-content");
+
+		if (titleElement) 
+			titleElement.textContent = event.title;
+
+		if (startTimeElement) 
+			startTimeElement.textContent = event.startText || event.start.toLocaleString();
+
+		if (durationElement) 
+			durationElement.textContent = stringifyDuration(event.duration);
+
+		if (summaryElement)
+			if (event.description)
+				summaryElement.innerHTML = event.description;
+			else
+				summaryElement.textContent = event.rawDescription;
+
 	}
 	async function updateSchedule() {
 		try {
 			const events = await getSchedule();
-			const eventsOnThisChannel = events.filter(event => event[currentChannel]);
-			const eventsOnAltChannel = events.filter(event => event[altChannel]);
-			
-			const {
-				current: currentEvent,
-				next: nextEvent
-			} = getEvents(eventsOnThisChannel);
-			if (currentEvent) runFunctionAtDate(currentEvent.end, updateSchedule);
-			if (nextEvent) runFunctionAtDate(nextEvent.start, updateSchedule);
+			const eventsOnThisChannel = events.filter(event => event.channel === currentChannel);
+			const eventsOnNextChannel = events.filter(event => event.channel === nextChannel);
+			const { current: currentEvent, next: nextEvent } = getEvents(eventsOnThisChannel);
+
+			if (currentEvent) 
+				runFunctionAtDate(currentEvent.end, updateSchedule);
+
+			if (nextEvent) 
+				runFunctionAtDate(nextEvent.start, updateSchedule);
 			updateEventElement("event-current", currentEvent);
 			updateEventElement("event-next", nextEvent);
+			const { current: nextChannelEvent } = getEvents(eventsOnNextChannel);
+			updateEventElement("event-alt-channel", nextChannelEvent);
 
-			const {
-				current: altChannelEvent
-			} = getEvents(eventsOnAltChannel);
-			updateEventElement("event-alt-channel", altChannelEvent);
-			if (altChannelEvent) runFunctionAtDate(altChannelEvent.end, updateSchedule);
+			if (nextChannelEvent) 
+				runFunctionAtDate(nextChannelEvent.end, updateSchedule);
 
-			console.log({
-				currentEvent,
-				nextEvent,
-				altChannelEvent
-			});
+			if (DEBUG_NOW)
+				console.log({
+					currentEvent,
+					nextEvent,
+					nextChannelEvent
+				});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}
+
 	setInterval(updateSchedule, 15 * MINUTE_MS);
 	updateSchedule();
 })();
