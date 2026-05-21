@@ -3,10 +3,11 @@
 
 (function() {
 	const fs = require("node:fs/promises");
+	const path = require("node:path");
 
 	const DELAY_BETWEEN_REQUESTS = 2 * 1000;
-	const EMOTE_FAILURE_FILE = "/home/otaku/GitHub/mlpcon.online/cytube/emotes_failed.json";
-	const EMOTE_FILE = "/home/otaku/GitHub/mlpcon.online/cytube/emotes.json";
+	const EMOTE_FAILURE_FILE = path.join(__dirname, "..", "emotes_failed.json");
+	const EMOTE_FILE = path.join(__dirname, "..", "emotes.json");
 	const REQUEST_TIMEOUT = 30 * 1000;
 
 	async function checkEmoteUrl(emote) {
