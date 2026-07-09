@@ -1,0 +1,3 @@
+[submodule "cytube"]
+	path = cytube
+	url = git@github.com:mlpcon/cytube.git
