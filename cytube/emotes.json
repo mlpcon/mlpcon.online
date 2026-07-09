@@ -4,10 +4,6 @@
 		"image": "https://resources.pink.horse/images/cymotes/63250acbc6496a88942683bcc0050002.png"
 	},
 	{
-		"name": ":headcanon:",
-		"image": "https://mlpcon.online/image/emote/headcanon.png"
-	},
-	{
 		"name": "::):",
 		"image": "https://mlpcon.online/image/emote/%3a%29.png"
 	},
@@ -1436,6 +1432,10 @@
 		"image": "https://resources.pink.horse/images/cymotes/bc0c947ac577858309913ee5d3e79abb.gif"
 	},
 	{
+		"name": ":headcanon:",
+		"image": "https://mlpcon.online/image/emote/headcanon.png"
+	},
+	{
 		"name": ":heavy.breathing:",
 		"image": "https://derpicdn.net/img/2014/3/22/582261/small.png"
 	},
@@ -2482,6 +2482,10 @@
 	{
 		"name": ":ponkcorn:",
 		"image": "https://resources.pink.horse/images/cymotes/a5a9f0eb5f594de310ffd862ddfd5e0b.png"
+	},
+	{
+		"name": ":ponkers:",
+		"image": "https://mlpcon.online/image/emote/ponkers.png"
 	},
 	{
 		"name": ":ponkface:",
