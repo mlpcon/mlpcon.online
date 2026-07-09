@@ -1,11 +1,11 @@
 [
 	{
-		"name": "::):",
-		"image": "https://mlpcon.online/image/emote/%3a%29.png"
-	},
-	{
 		"name": ":,:",
 		"image": "https://resources.pink.horse/images/cymotes/63250acbc6496a88942683bcc0050002.png"
+	},
+	{
+		"name": "::):",
+		"image": "https://mlpcon.online/image/emote/%3a%29.png"
 	},
 	{
 		"name": ":???:",
@@ -3166,6 +3166,10 @@
 	{
 		"name": ":submissive:",
 		"image": "https://mlpcon.online/image/emote/submissive.png"
+	},
+	{
+		"name": ":sucks:",
+		"image": "https://mlpcon.online/image/emote/sucks.png"
 	},
 	{
 		"name": ":sugar.high:",
