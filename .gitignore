@@ -6,3 +6,4 @@ image/emote/iwtciz.png
 /2025
 /nginx/site-includes/mlpcon.online-proxy-redirects.conf
 node_modules/
+*:Zone.Identifier
