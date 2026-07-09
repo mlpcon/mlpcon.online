@@ -1048,6 +1048,10 @@
 		"image": "https://mlpcon.online/image/emote/epicdash.png"
 	},
 	{
+		"name": ":epicfail:",
+		"image": "https://mlpcon.online/image/emote/epicfail.png"
+	},
+	{
 		"name": ":epicwin:",
 		"image": "https://mlpcon.online/image/emote/epicwin.png"
 	},
