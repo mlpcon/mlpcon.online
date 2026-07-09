@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+"use strict";
+
+(function() {
+	const fs = require("node:fs/promises");
+	const path = require("node:path");
+
+	const EMOTE_FILE = path.join(__dirname, "..", "emotes.json");
+
+	function getEmotes() { return fs.readFile(EMOTE_FILE, { encoding: "utf8" }); }
+
+	function sortEmotes(emotes) { return emotes.sort((a, b) => a.name.localeCompare(b.name)); }
+
+	function writeSortedEmotes(emotes) { return fs.writeFile(EMOTE_FILE, JSON.stringify(emotes, null, "\t")); }
+
+	async function main() {
+		try {
+			const emotes = JSON.parse(await getEmotes());
+			const sorted = sortEmotes(working);
+			await writeSortedEmotes(sorted);
+			await writeFailedEmotes(failed);
+		} catch (err) { console.error(err); }
+	}
+
+	main();
+})();
