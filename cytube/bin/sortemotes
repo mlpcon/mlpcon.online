@@ -16,9 +16,9 @@
 	async function main() {
 		try {
 			const emotes = JSON.parse(await getEmotes());
-			const sorted = sortEmotes(working);
+			const sorted = sortEmotes(emotes);
 			await writeSortedEmotes(sorted);
-			await writeFailedEmotes(failed);
+			console.log("✅ Emotes successfully sorted by name.");
 		} catch (err) { console.error(err); }
 	}
 
